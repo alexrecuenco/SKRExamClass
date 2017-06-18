@@ -11,10 +11,6 @@
 % noquestionbreak: Prevents breaks after question and before choices, and prevent any break between paragraphs as a side effect. The whole chunk will be flushed out to the enxt page if it is needed.
 % The shortanswer environment works 
 %
-
-\NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{skrexam}[2017/06/18 Exam Class With SKR School Format]
-
 % v 0.2:
 % 	Added support to provide options to exam when in skrexam
 %	Improved stability of shortanswers environment
@@ -23,6 +19,17 @@
 %		Or using system fonts installed with the required name 
 %			(Add the option systemfonts for this)
 %
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{skrexam}[2017/06/18 Exam Class With SKR School Format]
+
+
+
+\newif\ifflushbottom
+\newif\ifnoquestionbreak
+\flushbottomfalse
+\noquestionbreakfalse
+
 \newcommand*\skr@fontpath{Path=Fonts/,}%
 \newcommand*\skr@font{THSarabun}
 \newcommand*\skr@boldfont{THSarabun Bold.ttf}
@@ -39,11 +46,11 @@
 }%	
 
 \DeclareOption{flushbottom}{%
-\flushbottom%
+\flushbottomtrue%
 }%
 
 \DeclareOption{noquestionbreak}{%
-\widowpenalties 1 10000%Prevents breaking of a question over two pages in multiple choice
+\noquestionbreaktrue
 }
 
 \PassOptionsToClass{12pt, a4paper}{exam}
@@ -70,6 +77,16 @@
 \RequirePackage{xltxtra} 
 
 
+\ifflushbottom%
+	\flushbottom%
+\else%
+\fi%
+
+\ifnoquestionbreak
+\widowpenalties 1 10000%Prevents breaking of a question over two pages in multiple choice
+
+\else
+\fi
 
 
 %Setting fonts
