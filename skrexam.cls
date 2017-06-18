@@ -5,20 +5,49 @@
 %Made by Alejandro Gonzalez Recuenco, 2017
 % Do not share outside of BFITS
 % e-mail safale93@gmail.com
+% Options for the class:
+% systemfonts: If this option is activated it tries to find the fonts for SKR on the system fonts, under the name THH SarabunPSK. Otherwise it will try to find the fonts in the local path Fonts/ with the name THSarabun.
+% flushbottom: Self explanatory
+% noquestionbreak: Prevents breaks after question and before choices, and prevent any break between paragraphs as a side effect. The whole chunk will be flushed out to the enxt page if it is needed.
+% The shortanswer environment works 
+%
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{skrexam}[2017/06/18 Exam Class With School Format]
+\ProvidesClass{skrexam}[2017/06/18 Exam Class With SKR School Format]
 
 % v 0.2:
-% 	Added support to provide answers
-%	
+% 	Added support to provide options to exam when in skrexam
+%	Improved stability of shortanswers environment
+%	Added option to switch between using the fonts in a folder called 
+%		Fonts/ In the current path (default behaviour)
+%		Or using system fonts installed with the required name 
+%			(Add the option systemfonts for this)
+%
+\newcommand*\skr@fontpath{Path=Fonts/,}%
+\newcommand*\skr@font{THSarabun}
+\newcommand*\skr@boldfont{THSarabun Bold.ttf}
+\newcommand*\skr@italicfont{THSarabun Italic.ttf}
+\newcommand*\skr@bolditalicfont{THSarabun Bold Italic.ttf}
+
+
+\DeclareOption{systemfonts}{%
+\renewcommand*\skr@fontpath{}
+\renewcommand*\skr@font{TH SarabunPSK}
+\renewcommand*\skr@boldfont{TH SarabunPSK Bold}
+\renewcommand*\skr@italicfont{TH SarabunPSK Italic}
+\renewcommand*\skr@bolditalicfont{TH SarabunPSK Bold Italic}
+}%	
+
 \DeclareOption{flushbottom}{%
 \flushbottom%
 }%
+
 \DeclareOption{noquestionbreak}{%
 \widowpenalties 1 10000%Prevents breaking of a question over two pages in multiple choice
 }
+
 \PassOptionsToClass{12pt, a4paper}{exam}
+
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{exam}}
  % All other options provided  to skrexam are dumped in the exam class
 \ProcessOptions\relax
@@ -52,18 +81,27 @@
 \XeTeXlinebreakskip = 0pt plus 1pt   %
 
 
-\setmainfont[Scale=\scale, BoldFont={TH SarabunPSK Bold},  
- ItalicFont={TH SarabunPSK Italic}, 
- BoldItalicFont={TH SarabunPSK Bold Italic} 
- ]{TH SarabunPSK}  
- \setsansfont[Scale=\scale, BoldFont={TH SarabunPSK Bold},  
- ItalicFont={TH SarabunPSK Italic}, 
- BoldItalicFont={TH SarabunPSK Bold Italic} 
- ]{TH SarabunPSK}  
- \setmonofont[Scale=\scale, BoldFont={TH SarabunPSK Bold},  
- ItalicFont={TH SarabunPSK Italic}, 
- BoldItalicFont={TH SarabunPSK Bold Italic} 
- ]{TH SarabunPSK}  
+\setmainfont[%
+	\skr@fontpath%
+	Scale=\scale,%
+	BoldFont={\skr@boldfont},%
+	ItalicFont={\skr@italicfont},% 
+ BoldItalicFont={\skr@bolditalicfont}%
+ ]{\skr@font}  
+ \setsansfont[%
+	\skr@fontpath%
+	Scale=\scale,%
+	BoldFont={\skr@boldfont},%
+	ItalicFont={\skr@italicfont},% 
+ BoldItalicFont={\skr@bolditalicfont}%
+ ]{\skr@font}  
+ \setmonofont[%
+	\skr@fontpath%
+	Scale=\scale,%
+	BoldFont={\skr@boldfont},%
+	ItalicFont={\skr@italicfont},% 
+ BoldItalicFont={\skr@bolditalicfont}%
+ ]{\skr@font}  
 
 %\setmathsfont(Digits){TH Sarabun New}
 
@@ -81,21 +119,32 @@
 \let\oldquestions\questions
 \let\oldendquestions\endquestions
 
+%\renewenvironment{questions}{%
+%%\renewcommand{\labelitemi}{\arabic{item}}%
+%\begin{oldquestions}%
+%\setcounter{question}{\value{questionnumber}}%
+%  \begin{itemize}%
+%  \newcommand\question{%
+%     \refstepcounter{questionnumber}\stepcounter{nummultiplechoice}\item[\thequestionnumber]%
+%  }%
+%}{%
+%  \end{itemize}%
+%}
+
+
 \renewenvironment{questions}{%
-%\renewcommand{\labelitemi}{\arabic{item}}%
-  \begin{itemize}%
-  \newcommand\question{%
-     \refstepcounter{questionnumber}\stepcounter{nummultiplechoice}\item[\thequestionnumber]%
+\begin{oldquestions}%
+\setcounter{question}{\value{questionnumber}}%
+  \let\oldquestion\question%
+  \def\question{%
+     \refstepcounter{questionnumber}\stepcounter{nummultiplechoice}\oldquestion%
   }%
 }{%
-  \end{itemize}%
+  \end{oldquestions}%
 }
-
-
 \newenvironment{shortanswers}{%
-\renewcommand{\questionlabel}{\thequestion.}%
 \begin{oldquestions}%
-\setcounter{question}{\value{questionnumber}}
+\setcounter{question}{\value{questionnumber}}%
   \let\oldquestion\question
   \def\question{%
      \refstepcounter{questionnumber}\stepcounter{numshortanswer}\oldquestion%
@@ -209,8 +258,22 @@
 }
 
 
+% Down here how to label different things, note that \thechoice can't be change to rename the 1. 2. 3. 4. in the choices environment. 
+%To modify the label of the choices environemnt, renewing the environment is required:
+%\RenewTasks[
+%	label-format = \bfseries,
+%	counter-format = {tsk[1].},
+%	item-indent = 3em,
+%	label-offset = 1em,
+%	label-align = left,
+%	after-item-skip = 3pt plus 2em
+%	]{choices}[\choice](2)
+
+
 \renewcommand\thesection{Part \Roman{section}.}
-\renewcommand{\thequestionnumber}{\arabic{questionnumber}.}
+%\renewcommand{\thequestionnumber}{\arabic{questionnumber}.}
+\renewcommand{\thequestion}{\arabic{question}}
+\renewcommand\questionlabel{\thequestion.}
 \renewcommand{\thechoice}{\ReadCounterPattern[tasks]{tsk}}  %\thechoice holds the number of the choice number in the choice environment when using it as a tasks environment... this command is here to keep the latex syntax consistent in the document
 
 
