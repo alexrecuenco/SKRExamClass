@@ -1,0 +1,260 @@
+ %!TEX encoding = UTF-8 Unicode
+%% TIKZ Commands and Math Preambles definitions
+%Made by Alejandro Gonzalez Recuenco, 2017
+% Do not share outside of BFITS
+% e-mail safale93@gmail.com
+
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mytikzmath}[2017/06/15 Personal package with formulas]
+
+% Packages that I used for some questions but I am not sure whether to load them or not:
+%\usepackage{venndiagram} %Easy but simple ven diagrams
+%\usepgfplotslibrary{fillbetween} %Filling graphs
+
+\RequirePackage{graphicx}
+\RequirePackage{xpatch}
+\RequirePackage{physics}%better math style
+\RequirePackage{esvect} %\vv command much better than vec
+
+\RequirePackage{tikz}
+\RequirePackage{pgf,pgfplots}
+	
+	
+	
+\usetikzlibrary{arrows, arrows.meta, positioning, calc}
+\usetikzlibrary{angles} %Creating angles
+
+\usepgfplotslibrary{fillbetween} %Filling graphs
+
+\pgfplotsset{compat=1.14} %package warning
+
+%pgfonlayer commands
+\pgfdeclarelayer{background layer}
+\pgfdeclarelayer{foreground layer}
+\pgfsetlayers{background layer,main,foreground layer}
+
+
+\NewDocumentEnvironment{sketchgraph}{m m m m O{1} O{} O{x} O{y} }{%
+	\begin{tikzpicture}[domain=#1:#2, #6,
+	dot/.style={circle,inner sep=1pt,fill,label={$##1$},name=##1},
+ 	extended line/.style={shorten >=-##1,shorten <=-##1},
+ 	extended line/.default=1cm
+	]%
+%	This environment is a tikzenvironment that surrounds a plot with a grid drawn already
+%	The y axis is labeled $y$ and the x axis is labeled $x$
+%	Inside the environment one can use the command \minx \miny \maxx \maxy to reference the min and max coordinates of the canvas, since theya re stored as those variables.
+%	Everything is included in an scope environment, therefore even if a clip is used, that will only affect the plotted graph inside the scope, which amkes sure the grid outside is maintained
+%	Args: 
+%		#1 x min
+%		#2 x max
+%		#3 y min
+%		#4 y max
+%		#5 O{1}grid step, should be given as (x step, y step) of the grid
+%		#6 O{} additional parameters to be included on the tikzpicture environment
+%	TODO: Extra aditional parameters to control the style/colors
+%	TODO2: environments to be passed to the scope independantly??
+    	\pgfmathsetmacro{\minx}{#1}
+    	\pgfmathsetmacro{\maxx}{#2}
+    	\pgfmathsetmacro{\miny}{#3}
+    	\pgfmathsetmacro{\maxy}{#4}
+        \draw[very thin, color = gray, dashed, step = {#5}] 
+        (\minx, \miny) grid (\maxx, \maxy);
+        \draw[->] (\minx, 0) -- (\maxx, 0) node[right] {$#7$};
+        \draw[->] (0, \miny) -- (0, \maxy) node[above] {$#8$};
+        \begin{scope}
+  }{%
+  		\end{scope}
+  	\end{tikzpicture}%
+  }
+
+\NewDocumentEnvironment{sketchvector}{m m m m O{1} O{} O{x} O{y} }{%
+	\begin{tikzpicture}[domain=#1:#2, 
+	dot/.style={circle,inner sep=1pt,fill,label={$##1$},name=##1},
+ 	extended line/.style={shorten >=-##1,shorten <=-##1},
+ 	extended line/.default=1cm,
+	#6
+	]%
+%	This environment is a tikzenvironment that surrounds a plot with a grid drawn already
+%	The y axis is labeled $y$ and the x axis is labeled $x$
+%	Inside the environment one can use the command \minx \miny \maxx \maxy to reference the min and max coordinates of the canvas, since theya re stored as those variables.
+%	Everything is included in an scope environment, therefore even if a clip is used, that will only affect the plotted graph inside the scope, which amkes sure the grid outside is maintained
+%	Args: 
+%		#1 x min
+%		#2 x max
+%		#3 y min
+%		#4 y max
+%		#5 O{1}grid step, should be given as (x step, y step) of the grid
+%		#6 O{} additional parameters to be included on the tikzpicture environment
+%	TODO: Extra aditional parameters to control the style/colors
+%	TODO2: environments to be passed to the scope independantly??
+    	\pgfmathsetmacro{\minx}{#1}
+    	\pgfmathsetmacro{\maxx}{#2}
+    	\pgfmathsetmacro{\miny}{#3}
+    	\pgfmathsetmacro{\maxy}{#4}
+%        \draw[very thin, color = gray, dashed, step = {#5}] 
+%         (\minx, \miny) grid (\maxx, \maxy);
+        \draw[->] (\minx, 0) -- (\maxx, 0) node[right] {$#7$};
+        \draw[->] (0, \miny) -- (0, \maxy) node[above] {$#8$};
+        \begin{scope}
+}{%
+  		\end{scope}
+  	\end{tikzpicture}%
+}
+\NewDocumentEnvironment{sketchpolar}{O{4} O{} O{white}}{%
+% #1 is the maximum radius
+% #2 is the additional options to pass to teh tikzpicture environment
+% #3 is the color to paint the background of labels
+\newif\ifdrawlabels%
+\drawlabelstrue
+\begin{tikzpicture}[
+	draw labels/.is if = drawlabels,%
+	#2,%
+	>={latex[length = 3mm]}, 
+	]
+	\pgfmathsetmacro{\maxr}{#1}      
+	\pgfmathtruncatemacro{\maxrint}{\maxr}      
+	% Draw the lines at multiples of pi/12
+	\foreach \ang in {0,15,...,360} {
+		\draw [lightgray, ->] (0,0) -- (\ang : 1.1 * \maxrint) coordinate (angle \ang);
+	};
+        % Concentric circles and radius labels
+	\foreach \s in {1, 2, 3} {
+		\draw [lightgray] (0,0) circle ({\maxrint/4 *(\s - 0.5)});
+		\pgfmathsetmacro{\circleradii}{\maxrint/4 * \s}
+		\draw (0,0) circle (\circleradii);
+		\begin{pgfonlayer}{foreground layer}
+			\path (\circleradii, -0.2) node [fill = #3, inner sep = 0.5pt]   {\tiny $\circleradii$};
+		\end{pgfonlayer}
+	};       
+	
+	 % Add the labels and lines at multiples of pi/4
+	\foreach \ang/\label in {%
+		0/0,
+		1/{\pi/4},
+		2/{\pi/2},
+		3/{3\pi/4},
+		4/{\pi},
+		5/{5\pi/4},
+		7/{7\pi/4},
+		6/{3\pi/2}%
+	}{% end angles to draw
+	% Nested labels, label on a label
+	\pgfmathtruncatemacro{\angle}{\ang * 45}
+	\draw[-{latex[length=5mm]}] (0,0) -- (\angle : 1.12 * \maxrint)
+		\ifdrawlabels
+		node[
+			fill=white, inner sep =0pt, 
+			label={%
+				[label distance=0.1,
+				label = {%
+					[label distance=0.1]\angle:{\scriptsize $\angle^{\circ}$}%
+					}%
+				]\angle:{\scriptsize $\label \unit{rad}$}
+			}%,
+%				label={[label distance=0cm]\angle:{\scriptsize $\angle^{\circ}$}}
+			] 
+			{}
+		\fi;
+	}; %end \foreach \ang/\label
+	
+	% The double-lined circle around the whole diagram
+	\draw [style=double] (0,0) circle (\maxrint);   
+%        \fill [fill=red!50!black, opacity=0.5] plot [domain=-pi/2:pi/2] (xy polar cs:angle=\x r,radius= {2-2*sin(\x r)});
+%        \draw [thick,color=red,domain=0:2*pi,samples=200,smooth] plot (xy polar cs:angle=\x r,radius= {2-2*sin(\x r)});
+%        \node [fill=white] at (2,1) {$r=2-2\sin\theta$};
+}{
+	\end{tikzpicture}%
+}
+ 
+ 
+\tikzset{
+%	every label/.append style={font=\scriptsize},
+%    my edge labels/.style={font=\scriptsize},
+    extend line/.style={shorten >=-#1, shorten <=-#1},
+    extend line/.default=1cm
+}
+
+\tikzset{%
+	vector/.style =	{arrows= -{Stealth[length = 3mm]},%
+					every node/.style = {pos = 0.5,% 
+										sloped,%
+										above%
+										}
+					}
+}
+\tikzset{
+	right angle length/.code={\def\rightanglelength{#1}},   % Length of symbol
+    right angle length/.default=2ex, % Make sure it is set...
+    right angle symbol/.style n args={3}{
+        insert path={ %Imagine the angle is ABC
+            let \p1 = ($(#2)!\rightanglelength!(#3)$), % This is on line BC
+                \p2 = ($(#2)!\rightanglelength!(#1)$), % This is on line AB
+                \p3 = ($(\p1)+(\p2)-(#2)$)   % This is the outer corner point
+            in
+           		(\p1) -- (\p3) -- (\p2) -- (#2) -- cycle
+        }
+    }
+}
+\tikzset{
+> = {latex[length = 5mm]}
+}
+
+
+
+
+
+%<Math definitions>%
+
+\newcommand\myeq[2][0em]{\hspace{#1}\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily #2}}}{=}} \hspace{#1}}
+
+
+\newcommand*{\me}{\mathrm{e}} %ISO standard says e should be roman when not a variable
+\newcommand*{\ui}{\mathrm{i}} %ISO standard says e should be roman when not a variable
+\let\mathi\ui
+\let\mathe\me
+
+\newcommand*{\unit}[2][\,]{#1\mathrm{#2}} %ISO standard saysunits should be roman.
+% The optional argument is there in case other type of separation is needed, otherwise it uses an unbreakable superation is there in case you need to set up -- ENABLED AGAIN 
+% The optional argument is there in case other type of separation is needed, otherwise it uses an unbreakable superation is there in case you need to set up -- ENABLED AGAIN 
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\DeclareMathOperator{\cis}{cis}
+
+
+\newcount\colveccount
+\newcommand*\colvec[1]{
+        \global\colveccount#1
+        \begin{pmatrix}
+        \colvecnext
+}
+\def\colvecnext#1{
+        #1
+        \global\advance\colveccount-1
+        \ifnum\colveccount>0
+                \\
+                \expandafter\colvecnext
+        \else
+                \end{pmatrix}
+        \fi
+} 
+
+\def\i{\hat{i}} 		%vec i hat
+\def\j{\hat{j}} 		%vec j hat
+\def\k{\hat{k}}			%vec k hat
+
+\def\ijk{$\i$, $\j$ and $\k$\relax} % text ``i, j and k''
+	%macros to decompose vector automatically in different ways
+\def\vcomp#1{{#1}_{x}\i+{#1}_{y}\j+{#1}_{z}\k} 			%in terms of ijk
+\def\vsq#1{\left[{#1}_{x},{#1}_{y},{#1}_{z}\right]} 			%square brackets
+\def\v#1{\colvec{3}{{#1}_{x}}{{#1}_{y}}{{#1}_{z}}} 			%column vector brackets
+\def\vtwo#1{\colvec{2}{{#1}_{x}}{{#1}_{y}}} 				%column vector brackets
+\def\pcomp#1{\left({#1}_{x},{#1}_{y},{#1}_{z}\right)} 		%component of a point 
+
+
+%</Math definitions>%
+
