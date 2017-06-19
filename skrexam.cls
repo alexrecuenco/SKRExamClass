@@ -21,7 +21,7 @@
 %
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{skrexam}[2017/06/18 Exam Class With SKR School Format]
+\ProvidesClass{skrexam}[2017/06/19 Exam Class With SKR School Format]
 
 
 
@@ -75,7 +75,7 @@
 \RequirePackage[no-math]{fontspec} 
 \RequirePackage{xunicode} 
 \RequirePackage{xltxtra} 
-
+\RequirePackage{xparse}
 
 \ifflushbottom%
 	\flushbottom%
@@ -218,21 +218,38 @@
 	\end{tikzpicture}%
 }
 
-\newcommand{\fullanswersheet}[2][10]{%
+
+\DeclareDocumentCommand{\fullanswersheet}{O{10} O{0} m}{%
 \newcounter{qnum}%
-\setcounter{qnum}{0}%
-\pgfmathtruncatemacro{\nrows}{#2 / max(#1,1)}%
+\setcounter{qnum}{#2}%
+\pgfmathtruncatemacro{\ntotal}{#3}%
+\pgfmathtruncatemacro{\nrows}{\ntotal / max(#1,1)}%
 \ifnum\nrows>0\relax%
 	\foreach \tenquestion in {1,...,\nrows}{%
 		\answersheetrow[#1]~%
 		%~\answersheetrow[5]~\answersheetrow~\answersheetrow~\answersheetrow
       		}%
 \fi%
-\pgfmathtruncatemacro{\nlast}{#2-\nrows*#1}%
+\pgfmathtruncatemacro{\nlast}{\ntotal-\nrows*#1}%
 \ifnum\nlast>0\relax%
 	\answersheetrow[\nlast]%
 \fi%
 }
+%\newcommand{\fullanswersheet}[2][10]{%
+%\newcounter{qnum}%
+%\setcounter{qnum}{0}%
+%\pgfmathtruncatemacro{\nrows}{#2 / max(#1,1)}%
+%\ifnum\nrows>0\relax%
+%	\foreach \tenquestion in {1,...,\nrows}{%
+%		\answersheetrow[#1]~%
+%		%~\answersheetrow[5]~\answersheetrow~\answersheetrow~\answersheetrow
+%      		}%
+%\fi%
+%\pgfmathtruncatemacro{\nlast}{#2-\nrows*#1}%
+%\ifnum\nlast>0\relax%
+%	\answersheetrow[\nlast]%
+%\fi%
+%}
 
 
 %\makeatletter
