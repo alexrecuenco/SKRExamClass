@@ -23,12 +23,21 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{skrexam}[2017/06/19 Exam Class With SKR School Format]
 
-
+\newif\ifcoverpagefont
+\coverpagefontfalse
 
 \newif\ifflushbottom
-\newif\ifnoquestionbreak
 \flushbottomfalse
+
+\newif\ifnoquestionbreak
 \noquestionbreakfalse
+
+
+\newcommand*\skr@angs@fontpath{Path=Fonts/,}%
+\newcommand*\skr@angs@font{Angsa.TTF}
+\newcommand*\skr@angs@boldfont{Angsa Bold.TTF}
+\newcommand*\skr@angs@italicfont{Angsa Bold Italic.TTF}
+\newcommand*\skr@angs@bolditalicfont{Angsa Italic.TTF}
 
 \newcommand*\skr@fontpath{Path=Fonts/,}%
 \newcommand*\skr@font{THSarabun}
@@ -50,7 +59,11 @@
 }%
 
 \DeclareOption{noquestionbreak}{%
-\noquestionbreaktrue
+\noquestionbreaktrue%
+}
+
+\DeclareOption{coverpagefont}{%
+\coverpagefonttrue%
 }
 
 \PassOptionsToClass{12pt, a4paper}{exam}
@@ -84,8 +97,7 @@
 
 \ifnoquestionbreak
 \widowpenalties 1 10000%Prevents breaking of a question over two pages in multiple choice
-
-\else
+\else%
 \fi
 
 
@@ -120,6 +132,113 @@
  BoldItalicFont={\skr@bolditalicfont}%
  ]{\skr@font}  
 
+
+
+\ifcoverpagefont
+\newcommand*\scale@angs{1.5}
+\newfontfamily\coverpagefont[%
+	\skr@angs@fontpath%
+	Scale=\scale@angs,%
+	BoldFont={\skr@angs@boldfont},%
+	ItalicFont={\skr@angs@italicfont},% 
+ BoldItalicFont={\skr@angs@bolditalicfont}%
+ ]{\skr@angs@font}
+\else
+\newcommand*\coverpagefont{\normalfont}
+\fi
+
+
+
+%============================================================================================%
+% Set up for cover pages,
+
+\newcommand\asteriskfill{\leavevmode\xleaders\hbox{$\ast\ $}\hfill\kern0pt}
+
+
+
+%Filling information
+
+\newcommand*\ExamName{}
+\newcommand*\ExamNameTH{}
+\newcommand*\AcademicYear{}
+\newcommand*\AcademicYearTH{}
+\newcommand*\GradeLevel{}
+\newcommand*\GradeLevelTH{}
+\newcommand*\Subject{}
+\newcommand*\SubjectTH{}
+\newcommand*\Code{}
+\newcommand*\CodeTH{}
+\newcommand*\Time{}
+\newcommand*\TimeTH{}
+\newcommand*\Score{}
+\newcommand*\ScoreTH{}
+\newcommand*\HeaderClassTH{}
+
+
+%English Cover page
+
+\newcommand*\FullExamLine{%
+	\ExamName\hfill%
+	Academic Year: \AcademicYear\hfill%
+	Grade Level: \GradeLevel}
+\newcommand*\SubjectExamLine{%
+	Subject: \Subject \hfill%
+	Code: \Code\hfill%
+	Time: \Time\hfill%
+	Score: \Score}
+\newcommand*\FillNameLine{%
+	Name:\hrulefill\ %
+	Nickname:\hrulefill\ %
+	Class:\hrulefill\ %
+	Number:\hrulefill}
+
+\newcommand*\EnglishDescription{
+	\noindent%
+	\FullExamLine\linebreak%
+	\SubjectExamLine\linebreak%
+	\FillNameLine%
+	
+	\asteriskfill%
+	}
+
+%Thai cover page 
+\newcommand*\AcademicYearTHDescription{ปีการศึกษา}
+\newcommand*\GradeLevelTHDescription{ชั้นมัธยมศึกษาปีที่}
+\newcommand*\SubjectTHDescription{วิชา}
+\newcommand*\CodeTHDescription{รหัสวิชา}
+\newcommand*\TimeTHDescription{เวลา}
+\newcommand*\ScoreTHDescription{คะแนนเต็ม}
+
+\newcommand*\FullExamTHLine{%
+	\ExamNameTH\hfill%
+	\AcademicYearTHDescription\ \AcademicYearTH\hfill%
+	\GradeLevelTHDescription\ \GradeLevelTH}
+\newcommand*\SubjectExamTHLine{%
+	\SubjectTHDescription\ \SubjectTH\hfill%
+	\CodeTHDescription\ \CodeTH\hfill%
+	\TimeTHDescription\ \TimeTH\hfill%
+	\ScoreTHDescription\ \ScoreTH}
+\newcommand*\FillNameTHLine{%
+	ชื่อ-นามสกุล\hrulefill\  %
+	ห้อง\hrulefill\  %
+	เลขที่\hrulefill\  %
+	ห้องสอบเลขที่\hrulefill}
+
+\newcommand*\ThaiDescription{
+	\noindent%
+	\FullExamTHLine\linebreak%
+	\SubjectExamTHLine\linebreak%
+	\FillNameTHLine\linebreak%
+	
+	\asteriskfill%
+	}
+
+
+% Header Exam
+\newcommand*\HeaderClassTHDescription{ห้อง ม.}
+\newcommand*\PageTHDescription{หน้า}
+
+\newcommand*\HeaderDescription{\ExamNameTH\ \AcademicYearTHDescription\ \AcademicYearTH\ \SubjectTHDescription\ \SubjectTH \CodeTHDescription\ \Code\ \HeaderClassTHDescription \HeaderClassTH \PageTHDescription\ \thepage}
 
 
 %\setmathsfont(Digits){TH Sarabun New}
@@ -196,12 +315,9 @@
 \BeforeBeginEnvironment{choices}{\noheadingbreakpar\minipage{\linewidth}\vspace{\beforechoicessep}}
 \AfterEndEnvironment{choices}{\vspace{\afterchoicessep}\endminipage\par}
 
+\AfterEndEnvironment{coverpages}{\setcounter{page}{2}}
 
-\newcommand\asteriskfill{\leavevmode\xleaders\hbox{$\ast\ $}\hfill\kern0pt}
-
-
-
-
+\BeforeBeginEnvironment{coverpages}{}
 
 \newcommand\ShortAnswerSheetQuestion{%
 	Question \theloop@shortanswer:\par%
@@ -309,15 +425,16 @@
 % #1: length of fill with dotted lines
 % #2: totcounter with number of short answer questions
 % #3: totounter with number of questions before the start of short answer. i.e., If the number is 30, it starts at 31
-\edef\@X@totalvalue{\totalvalue{#2}}
-\edef\@Y@value{#1}
+\pgfmathtruncatemacro\@X@totalvalue{#2}
+\pgfmathtruncatemacro\@Y@value{#1}
+\pgfmathtruncatemacro\@shortanswer@startvalue{#3}
 \setcounter{loop@X}{\@X@totalvalue}%
 \setcounter{loop@Y}{\@Y@value}
-\edef\@shortanswer@totalvalue{\totalvalue{#3}}
+%\edef\@shortanswer@totalvalue{\totalvalue{#3}}
 % Short Answers: X is \theX Y is \theY  and we have \numquestions and as ewll \thenumshortanswer%
 \vspace{1em}%
 \begin{enumerate}%
-\setcounter{enumi}{\@shortanswer@totalvalue}
+\setcounter{enumi}{\@shortanswer@startvalue}
 \forloop[-1]{loop@X}{\value{loop@X}}{\value{loop@X}>0}{%
 	\item \dotfill\vspace{\newdottedlineheight}%
 	\forloop[-1]{loop@Y}{#1}{\value{loop@Y}>0}{%
@@ -327,18 +444,18 @@
 \end{enumerate}%
 }
 
-\DeclareDocumentCommand{\MultipleChoiceAnswerSheet}{O{10}  m O{0} O{300} O{4} }{%
-% #1: nrows
-% #2: ncols
-% #3: starting value
-% #4: max ntotal
-% #5: sidelength of squares
+\DeclareDocumentCommand{\MultipleChoiceAnswerSheet}{O{10} O{0} m  O{4}}{%
+% #1: nrows, nquestions per row
+% #2: ntotal questions
+% #3: starting value of counter
+% #4: sidelength of squares, in fifths of a cm
 \begin{tikzpicture}
-\pgfmathtruncatemacro\startingvalue{#3}
-\pgfmathtruncatemacro\maxvaluequestionnumber{#4+1}
 \pgfmathtruncatemacro{\nrows}{#1}%
-\pgfmathtruncatemacro{\ncols}{#2}%
-\pgfmathsetmacro{\sidelength}{#5}
+\pgfmathtruncatemacro\startingvalue{#2}
+\pgfmathtruncatemacro\@nmultiplechoice{#3}
+\pgfmathsetmacro{\sidelength}{#4}
+\pgfmathtruncatemacro\maxvaluequestionnumber{\@nmultiplechoice+\startingvalue+1}
+\pgfmathtruncatemacro{\ncols}{ceil(\@nmultiplechoice/\nrows)}%
 \foreach \colnumber in {1,...,\ncols}{
 	\path ({(\colnumber - 1)*\sidelength},0) coordinate (start col);
 	\path ($(start col) +(\sidelength/5,0)$) coordinate (start draw);
@@ -364,6 +481,9 @@
 			rectangle ++(\sidelength/5,-\sidelength/5);
 		\ifnum\questionnumber<\maxvaluequestionnumber\relax%
 			\node at (number)  {\questionnumber};
+		\else
+			\fill[gray] (number) +(-\sidelength/10,-\sidelength/10)
+				rectangle +(\sidelength/10,\sidelength/10);
 		\fi
 	};
 };
