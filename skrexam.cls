@@ -76,7 +76,7 @@
 \RequirePackage{xunicode} 
 \RequirePackage{xltxtra} 
 \RequirePackage{xparse}
-
+	\usetikzlibrary{calc}
 \ifflushbottom%
 	\flushbottom%
 \else%
@@ -119,6 +119,8 @@
 	ItalicFont={\skr@italicfont},% 
  BoldItalicFont={\skr@bolditalicfont}%
  ]{\skr@font}  
+
+
 
 %\setmathsfont(Digits){TH Sarabun New}
 
@@ -186,7 +188,7 @@
 %\makeatother
 
 \newlength{\beforechoicessep}
-\setlength{\beforechoicessep}{4mm}
+\setlength{\beforechoicessep}{1mm}
 
 \newlength{\afterchoicessep}
 \setlength{\afterchoicessep}{4mm}
@@ -195,7 +197,26 @@
 \AfterEndEnvironment{choices}{\vspace{\afterchoicessep}\endminipage\par}
 
 
+\newcommand\asteriskfill{\leavevmode\xleaders\hbox{$\ast\ $}\hfill\kern0pt}
 
+
+
+
+
+\newcommand\ShortAnswerSheetQuestion{%
+	Question \theloop@shortanswer:\par%
+}
+
+
+\setlength\dottedlinefillheight{1cm}
+\newlength\newdottedlineheight
+\setlength\newdottedlineheight{0.6cm}
+
+
+\newcounter{q@num}%
+\newcounter{loop@X}
+\newcounter{loop@shortanswer}
+\newcounter{loop@Y}
 
 %% Answer sheet at the start 
  %Answer sheet standard
@@ -217,8 +238,6 @@
 		}% close foreach
 	\end{tikzpicture}%
 }
-
-\newcounter{q@num}%
 
 \DeclareDocumentCommand{\fullanswersheet}{O{10} O{0} m}{%
 \setcounter{q@num}{#2}%
@@ -254,18 +273,13 @@
 
 %\makeatletter
 \newcommand\totalvalue[1]{%
-\ifnum\value{#1@totc}=-1 0% 
+\ifnum\value{#1@totc}=-1 1% 1 if the value is not determined yet, otherwise it breaks things
 \else%
 	\number\value{#1@totc}%
 \fi%
 }
 %\makeatother
 
-
-
-\newcommand\ShortAnswerSheetQuestion{%
-	Question \theshortanswer:\par%
-}
 
  % Answer sheets
  	% nummultiplechoice: 	holds only multiplechoice
@@ -274,23 +288,87 @@
 	% Commads ->
 	%\fullanswersheet[<questions per column>]{<number of columns>}
 	%\shortanswersheet[<shoranswerspace(length)>]{<totcounter shortanswer>}{<totcounter previous>}	
+
+
 \newcommand*\shortanswersheet[3][9cm]{%
 % #1: length of fill with dotted lines
 % #2: totcounter with number of short answer questions
 % #3: totounter with number of questions before the start of short answer. i.e., If the number is 30, it starts at 31
-\newcounter{X}%
-\newcounter{shortanswer}%
-\setcounter{X}{\totalvalue{#2}}%
-\setcounter{shortanswer}{\totalvalue{#3}}%
-\vspace{1em}
+\setcounter{loop@X}{\totalvalue{#2}}%
+\setcounter{loop@shortanswer}{\totalvalue{#3}}%
+\vspace{1em}%
 % Short Answers: X is \theX Y is \theY  and we have \numquestions and as ewll \thenumshortanswer%
-\forloop[-1]{X}{\value{X}}{\value{X}>0}{%
-	\par\noindent\stepcounter{shortanswer}%
+\forloop[-1]{loop@X}{\value{loop@X}}{\value{loop@X}>0}{%
+	\par\noindent\stepcounter{loop@shortanswer}%
 	\ShortAnswerSheetQuestion%This command should have the question blablabla thingy
 	 \fillwithdottedlines{#1}% 
 }%
 }
 
+\newcommand*\ShortAnswerSheet[3][5]{%
+% #1: length of fill with dotted lines
+% #2: totcounter with number of short answer questions
+% #3: totounter with number of questions before the start of short answer. i.e., If the number is 30, it starts at 31
+\edef\@X@totalvalue{\totalvalue{#2}}
+\edef\@Y@value{#1}
+\setcounter{loop@X}{\@X@totalvalue}%
+\setcounter{loop@Y}{\@Y@value}
+\edef\@shortanswer@totalvalue{\totalvalue{#3}}
+% Short Answers: X is \theX Y is \theY  and we have \numquestions and as ewll \thenumshortanswer%
+\vspace{1em}%
+\begin{enumerate}%
+\setcounter{enumi}{\@shortanswer@totalvalue}
+\forloop[-1]{loop@X}{\value{loop@X}}{\value{loop@X}>0}{%
+	\item \dotfill\vspace{\newdottedlineheight}%
+	\forloop[-1]{loop@Y}{#1}{\value{loop@Y}>0}{%
+	\newline\vspace{\newdottedlineheight}\mbox{}\dotfill%
+	} %
+}%
+\end{enumerate}%
+}
+
+\DeclareDocumentCommand{\MultipleChoiceAnswerSheet}{O{10}  m O{0} O{300} O{4} }{%
+% #1: nrows
+% #2: ncols
+% #3: starting value
+% #4: max ntotal
+% #5: sidelength of squares
+\begin{tikzpicture}
+\pgfmathtruncatemacro\startingvalue{#3}
+\pgfmathtruncatemacro\maxvaluequestionnumber{#4+1}
+\pgfmathtruncatemacro{\nrows}{#1}%
+\pgfmathtruncatemacro{\ncols}{#2}%
+\pgfmathsetmacro{\sidelength}{#5}
+\foreach \colnumber in {1,...,\ncols}{
+	\path ({(\colnumber - 1)*\sidelength},0) coordinate (start col);
+	\path ($(start col) +(\sidelength/5,0)$) coordinate (start draw);
+	\fill[draw = black] (start col) rectangle ++(\sidelength/5,-\sidelength/5);
+	\draw (start draw) rectangle ++(\sidelength/5,-\sidelength/5)
+		node[pos = 0.5] {1.}
+		rectangle ++(\sidelength/5,\sidelength/5)
+		node[pos = 0.5] {2.}
+		rectangle ++(\sidelength/5,-\sidelength/5)
+		node[pos = 0.5] {3.}
+		rectangle ++(\sidelength/5,\sidelength/5)
+		node[pos = 0.5] {4.};
+	
+	\path (start col) coordinate (start row);
+	\foreach \rownumber in {1,...,\nrows}{
+		\pgfmathtruncatemacro{\questionnumber}{(\colnumber-1)*\nrows + \rownumber + \startingvalue}
+		\path ($(start row) +(0,-\sidelength/5)$) coordinate (start row);
+		\draw (start row) rectangle ++(\sidelength/5,-\sidelength/5)%
+				node[pos = 0.5] (number) {}%
+			rectangle ++(\sidelength/5,\sidelength/5)
+			rectangle ++(\sidelength/5,-\sidelength/5)
+			rectangle ++(\sidelength/5,\sidelength/5)
+			rectangle ++(\sidelength/5,-\sidelength/5);
+		\ifnum\questionnumber<\maxvaluequestionnumber\relax%
+			\node at (number)  {\questionnumber};
+		\fi
+	};
+};
+\end{tikzpicture}%
+}
 
 % Down here how to label different things, note that \thechoice can't be change to rename the 1. 2. 3. 4. in the choices environment. 
 %To modify the label of the choices environemnt, renewing the environment is required:

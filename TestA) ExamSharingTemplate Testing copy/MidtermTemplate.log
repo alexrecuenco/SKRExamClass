@@ -1,10 +1,10 @@
-This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016) (preloaded format=xelatex 2017.4.26)  19 JUN 2017 17:04
+This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016) (preloaded format=xelatex 2017.4.26)  19 JUN 2017 09:08
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**AnswerSheet.tex
-(./AnswerSheet.tex
+**MidtermTemplate.tex
+(./MidtermTemplate.tex
 LaTeX2e <2017/01/01> patch level 3
 Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
 (../skrexam.cls
@@ -1113,10 +1113,6 @@ LaTeX Info: Redefining \LaTeXe on input line 219.
 \l__xetex_show_hyphens_final_box=\box62
 \g__xetex_show_hyphens_word_box=\box63
 )
-(/usr/local/texlive/2016/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
-s/tikzlibrarycalc.code.tex
-File: tikzlibrarycalc.code.tex 2013/07/15 v3.0.1a (rcs-revision 1.9)
-)
 \g__fontspec_family_THSarabun_int=\count297
 .................................................
 . fontspec info: "defining-font"
@@ -1195,82 +1191,49 @@ LaTeX Info: Redefining \ttfamily on input line 121.
 .................................................
 . LaTeX info: "xparse/redefine-environment"
 . 
-. Redefining environment 'choices' with sig. 'O{}D(){2}' on line 184.
+. Redefining environment 'choices' with sig. 'O{}D(){2}' on line 182.
 .................................................
 \beforechoicessep=\skip88
 \afterchoicessep=\skip89
-\newdottedlineheight=\skip90
 \c@q@num=\count304
-\c@loop@X=\count305
-\c@loop@shortanswer=\count306
-\c@loop@Y=\count307
 .................................................
 . LaTeX info: "xparse/define-command"
 . 
-. Defining command \fullanswersheet with sig. 'O{10} O{0} m' on line 256.
-.................................................
-.................................................
-. LaTeX info: "xparse/define-command"
-. 
-. Defining command \MultipleChoiceAnswerSheet with sig. 'O{10} m O{0} O{300}
-. O{4} ' on line 371.
+. Defining command \fullanswersheet with sig. 'O{10} O{0} m' on line 237.
 .................................................
 )
-(/usr/local/texlive/2016/texmf-dist/tex/latex/tcolorbox/tcolorbox.sty
-Package: tcolorbox 2017/02/24 version 4.02 text color boxes
+(./MidtermTemplate.aux)
+\openout1 = `MidtermTemplate.aux'.
 
-(/usr/local/texlive/2016/texmf-dist/tex/latex/tools/verbatim.sty
-Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
-\every@verbatim=\toks51
-\verbatim@line=\toks52
-\verbatim@in@stream=\read4
-)
-\tcb@titlebox=\box64
-\tcb@upperbox=\box65
-\tcb@lowerbox=\box66
-\tcb@phantombox=\box67
-\c@tcbbreakpart=\count308
-\c@tcblayer=\count309
-\tcolorbox@number=\count310
-\tcb@temp=\box68
-\tcb@temp=\box69
-\tcb@temp=\box70
-\tcb@temp=\box71
-\tcb@out=\write5
-\tcb@record@out=\write6
-)
-(./easysetup.tex) (./AnswerSheet.aux)
-\openout1 = `AnswerSheet.aux'.
-
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for LTH/norasi/m/n on input line 46.
-LaTeX Font Info:    Try loading font information for LTH+norasi on input line 4
-6.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for LTH/norasi/m/n on input line 29.
+LaTeX Font Info:    Try loading font information for LTH+norasi on input line 2
+9.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/fonts-tlwg/lthnorasi.fd
 File: lthnorasi.fd 2000/05/09 v1.0 Thai font definitions
 )
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 46.
-LaTeX Font Info:    Try loading font information for T3+cmr on input line 46.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 29.
+LaTeX Font Info:    Try loading font information for T3+cmr on input line 29.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/tipa/t3cmr.fd
 File: t3cmr.fd 2001/12/31 TIPA font definitions
 )
-LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    ... okay on input line 29.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -1307,51 +1270,65 @@ LaTeX Font Info:    ... okay on input line 46.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 ABD: EveryShipout initializing macros
-File: images/SKRsmall.png Graphic file (type QTm)
- <use  "images/SKRsmall.png" >
+LaTeX Font Info:    Font shape `TU/THSarabun(0)/bx/n' will be
+(Font)              scaled to size 16.79993pt on input line 40.
+LaTeX Font Info:    Font shape `TU/THSarabun(0)/bx/n' will be
+(Font)              scaled to size 24.19188pt on input line 40.
+LaTeX Font Info:    Font shape `TU/THSarabun(0)/bx/it' will be
+(Font)              scaled to size 24.19188pt on input line 40.
+File: images/BFITS.png Graphic file (type QTm)
+ <use  "images/BFITS.png" >
+File: images/SKR.jpg Graphic file (type QTm)
+
+<use  "images/SKR.jpg" > [1
+
+] [2
+
+]
 LaTeX Font Info:    Font shape `TU/THSarabun(0)/m/n' will be
-(Font)              scaled to size 20.1599pt on input line 112.
-LaTeX Font Info:    Try loading font information for U+msa on input line 120.
+(Font)              scaled to size 24.19188pt on input line 65.
+LaTeX Font Info:    Font shape `TU/THSarabun(0)/m/n' will be
+(Font)              scaled to size 13.99994pt on input line 71.
+LaTeX Font Info:    Font shape `TU/THSarabun(0)/bx/n' will be
+(Font)              scaled to size 13.99994pt on input line 71.
+ [1
+
+]
+\c@X=\count305
+\c@shortanswer=\count306
+ [2]
+LaTeX Font Info:    Font shape `TU/THSarabun(0)/bx/it' will be
+(Font)              scaled to size 15.32993pt on input line 99.
+LaTeX Font Info:    Try loading font information for U+msa on input line 105.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 120.
+LaTeX Font Info:    Try loading font information for U+msb on input line 105.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 117--121
-
- []
-
 LaTeX Font Info:    Font shape `TU/THSarabun(0)/m/n' will be
-(Font)              scaled to size 24.19188pt on input line 125.
-LaTeX Font Info:    Font shape `TU/THSarabun(0)/bx/n' will be
-(Font)              scaled to size 24.19188pt on input line 125.
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-[1
+(Font)              scaled to size 11.19995pt on input line 153.
+LaTeX Font Info:    Font shape `TU/THSarabun(0)/m/n' will be
+(Font)              scaled to size 8.39996pt on input line 153.
+ [3
 
-] [2] [3] [4] [5] [6] [7] [8] [9]
-This exam contains 2 questions with 0 parts, 0 subparts, and 0 subsubparts.
-(./AnswerSheet.aux)
+] [4]
+This exam contains 6 questions with 2 parts, 0 subparts, and 0 subsubparts.
+(./MidtermTemplate.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 29705 strings out of 493068
- 601375 string characters out of 6135636
- 702092 words of memory out of 5000000
- 33217 multiletter control sequences out of 15000+600000
- 8389 words of font info for 45 fonts, out of 8000000 for 9000
+ 28138 strings out of 493068
+ 560779 string characters out of 6135636
+ 619403 words of memory out of 5000000
+ 31653 multiletter control sequences out of 15000+600000
+ 9082 words of font info for 54 fonts, out of 8000000 for 9000
  1347 hyphenation exceptions out of 8191
- 68i,10n,73p,10366b,601s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 68i,10n,72p,10370b,879s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on AnswerSheet.pdf (9 pages).
+Output written on MidtermTemplate.pdf (6 pages).
