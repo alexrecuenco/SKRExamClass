@@ -1,0 +1,207 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+% Created by Alejandro Gonzalez Recuenco, 2017
+% Do not share outside of BFITS
+% e-mail safale93@gmail.com
+
+
+
+\documentclass[noquestionbreak, flushbottom]{../skrexam}  %Draft option also removes the pictures
+
+\graphicspath{{images/}}
+
+%<Header & Footer>%
+\pagestyle{headandfoot}
+\firstpageheader{ first page header left}{ first page header center}{ first page header left right}
+\firstpagefooter{first page left}{first page center}{\thepage}
+\firstpagefootrule
+\firstpageheadrule
+
+
+\runningheader{header left}{header center}{header  right}
+\runningfooter{footer left}{footer center}{\thepage}
+
+\runningheadrule
+\runningfootrule
+%</Header & Footer>%
+
+
+\begin{document}
+
+
+
+\begin{coverpages}
+	\begin{center}
+		
+		\vspace{\stretch{.2}}
+		
+		\textbf{
+		\Large\textit{Midterm}
+		}
+		
+		\raisebox{-0.5\height}{\includegraphics[width = 4cm]{BFITS.png}}
+		\hfill Term 1 --- 2017 \hfill
+		\raisebox{-0.5\height}{\includegraphics[width = 4cm]{SKR.jpg}}
+		
+		
+		\vspace{\stretch{.2}}
+		 
+%		{\large  Exam Version: \textbf{\myversion}}
+		 
+	\end{center}
+	
+	\vspace{\stretch{4}}
+%	\rule{\textwidth}{5pt}
+	\cleardoublepage
+\end{coverpages}
+
+	
+
+% Answer Sheets over here
+\rule{0.9\textwidth}{5pt}
+
+\vspace{\stretch{0.2}}
+
+\section*{Answer the multiple choice section here}  %Multiple Choice
+\vspace{\stretch{0.8}}
+
+\begin{center}
+	
+	\edef\multiplechoice{\totalvalue{nummultiplechoice}}%expanding with edef
+	\fullanswersheet[15][10]{\multiplechoice}
+	
+	
+	\vspace{\stretch{1}}
+	
+	\rule{\textwidth}{5pt}%
+\end{center}
+
+
+\newpage
+\rule{0.9\textwidth}{5pt}
+
+\section*{Answers the short answer section here} %Short Answer	
+	
+\shortanswersheet[10cm]{numshortanswer}{nummultiplechoice}
+	
+\vspace{\stretch{1}}
+
+\rule{0.9\textwidth}{5pt}
+
+\cleardoublepage
+
+
+
+\begin{questions}
+\section{Multiple Choice. (1 point each)%
+\protect\\%
+\textit{\small Choose the correct answer from the given choices}%
+}
+
+\question True/False
+\begin{choices}
+    \choice True
+    \choice\CorrectChoice False
+\end{choices}
+
+	
+\question Multiple choice 2 columns
+\begin{choices}
+    \choice 1 
+    \choice 2 
+    \choice text in three 
+    \choice\CorrectChoice False
+\end{choices}
+
+\question Multiple choice 1 column
+\begin{choices}(1)
+    \choice 1 
+    \choice 2 
+    \choice text in three 
+    \choice\CorrectChoice False
+\end{choices}
+\question asdfsadfsdaf 
+sdfsdfsdaf
+sdfads
+fdsaf
+sdf
+dsfasdfds $ \alpha \beta\frac{x+1}{x-2}$  faf
+das
+fdsaafds
+fsda
+\par\nopagebreak
+sdfsadasdf
+
+
+
+\begin{choices}(3)
+    \choice 1 
+    \choice 2 
+    \choice text in three 
+    \choice\CorrectChoice False
+\end{choices}
+
+\end{questions}
+
+
+
+\[
+\underset{%
+	\text{End of \thesection}%
+	}{%
+	\text{\underline{\hspace{\textwidth}}}%
+}
+\]
+	
+\newpage
+%\question 
+%\begin{choices}
+%	\choice •
+%	\choice •
+%	\choice •
+%	\choice\CorrectChoice •
+%\end{choices} •
+%
+\section{Short answer questions. (1 point each)%
+\protect\\%
+\textit{\small Show your solution.}%
+}
+
+
+\begin{shortanswers}
+	\question first question
+	\question question with parts
+	
+	\[ x = \frac{32+x}{4-x} \]
+	
+	\begin{parts}
+	\part Hello
+	\part Hello to you too
+	\end{parts}
+	
+\end{shortanswers}
+
+
+\[
+\underset{%
+	\text{End of \thesection}%
+	}{%
+	\text{\underline{\hspace{\textwidth}}}%
+}
+\]
+
+%\nomorequestions
+%
+%\vspace{\stretch{1}}
+%\center
+%\rule{10cm}{.8pt}
+%\endcenter
+%\vspace{\stretch{6}}
+
+\end{document}
+
+
+
+
+
+
