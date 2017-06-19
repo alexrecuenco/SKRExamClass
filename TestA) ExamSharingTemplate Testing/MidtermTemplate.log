@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016) (preloaded format=xelatex 2017.4.26)  19 JUN 2017 08:26
+This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016) (preloaded format=xelatex 2017.4.26)  19 JUN 2017 09:08
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1195,6 +1195,7 @@ LaTeX Info: Redefining \ttfamily on input line 121.
 .................................................
 \beforechoicessep=\skip88
 \afterchoicessep=\skip89
+\c@q@num=\count304
 .................................................
 . LaTeX info: "xparse/define-command"
 . 
@@ -1286,7 +1287,6 @@ File: images/SKR.jpg Graphic file (type QTm)
 ]
 LaTeX Font Info:    Font shape `TU/THSarabun(0)/m/n' will be
 (Font)              scaled to size 24.19188pt on input line 65.
-\c@qnum=\count304
 LaTeX Font Info:    Font shape `TU/THSarabun(0)/m/n' will be
 (Font)              scaled to size 13.99994pt on input line 71.
 LaTeX Font Info:    Font shape `TU/THSarabun(0)/bx/n' will be
@@ -1324,11 +1324,11 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
  ) 
 Here is how much of TeX's memory you used:
  28138 strings out of 493068
- 560775 string characters out of 6135636
- 619406 words of memory out of 5000000
+ 560779 string characters out of 6135636
+ 619403 words of memory out of 5000000
  31653 multiletter control sequences out of 15000+600000
  9082 words of font info for 54 fonts, out of 8000000 for 9000
  1347 hyphenation exceptions out of 8191
- 68i,10n,72p,10370b,885s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 68i,10n,72p,10370b,879s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on MidtermTemplate.pdf (6 pages).

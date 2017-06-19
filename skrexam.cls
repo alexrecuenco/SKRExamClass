@@ -206,9 +206,9 @@
 		\pgfmathsetmacro{\ylineskip}{1cm}%
 		\pgfmathsetlengthmacro{\bubbler}{0.2cm}% measured from center
 		\foreach \line in {1,...,#1} {%
-			\stepcounter{qnum}%
+			\stepcounter{q@num}%
         	\begin{scope}[yshift = -\line * \ylineskip]%
-				\node at (0,0) {\textbf{\theqnum}};%
+				\node at (0,0) {\textbf{\theq@num}};%
 				\foreach \count/\thecount/\thaicount in {1/a/๑, 2/b/๒, 3/c/๓, 4/d/๔} { %
 					\draw ({\count * (2 * \bubbler + \bubblehsep)-\bubbler }, -\bubbler) rectangle ++(2*\bubbler, 2*\bubbler) node[pos = 0.5, label =\thecount] {} node[pos = 0.5, text height = \bubbler, text depth = 0.1ex]{\thaicount};
 
@@ -218,10 +218,10 @@
 	\end{tikzpicture}%
 }
 
+\newcounter{q@num}%
 
 \DeclareDocumentCommand{\fullanswersheet}{O{10} O{0} m}{%
-\newcounter{qnum}%
-\setcounter{qnum}{#2}%
+\setcounter{q@num}{#2}%
 \pgfmathtruncatemacro{\ntotal}{#3}%
 \pgfmathtruncatemacro{\nrows}{\ntotal / max(#1,1)}%
 \ifnum\nrows>0\relax%
