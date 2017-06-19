@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016) (preloaded format=xelatex 2017.4.26)  18 JUN 2017 14:03
+This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016) (preloaded format=xelatex 2017.4.26)  19 JUN 2017 08:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -12,7 +12,7 @@ Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
 LaTeX Warning: You have requested document class `../skrexam',
                but the document class provides `skrexam'.
 
-Document Class: skrexam 2017/06/18 Exam Class With School Format
+Document Class: skrexam 2017/06/19 Exam Class With SKR School Format
 (/usr/local/texlive/2016/texmf-dist/tex/latex/exam/exam.cls
 Document Class: exam 2015/05/07 Version 2.5 by Philip Hirschhorn
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/ifthen.sty
@@ -1137,10 +1137,10 @@ LaTeX Info: Redefining \LaTeXe on input line 219.
 . Italic.ttf]/OT:script=latn;language=DFLT;mapping=tex-text;"
 . - 'bold italic small caps'  (bx/itsc) with NFSS spec.: 
 .................................................
-LaTeX Info: Redefining \rmfamily on input line 84.
+LaTeX Info: Redefining \rmfamily on input line 107.
 LaTeX Font Info:    Font shape `TU/THSarabun(0)/m/n' will be
-(Font)              scaled to size 16.79993pt on input line 84.
-LaTeX Info: Redefining \sffamily on input line 91.
+(Font)              scaled to size 16.79993pt on input line 107.
+LaTeX Info: Redefining \sffamily on input line 114.
 .................................................
 . fontspec info: "defining-font"
 . 
@@ -1181,7 +1181,7 @@ le=1.4,BoldFont={THSarabun
 . \fontdimen 4\font =0\fontdimen 4\font \fontdimen 7\font =0\fontdimen 2\font
 . \hyphenchar \font =\c_minus_one 
 .................................................
-LaTeX Info: Redefining \ttfamily on input line 98.
+LaTeX Info: Redefining \ttfamily on input line 121.
 \c@questionnumber=\count298
 \c@questionnumber@totc=\count299
 \c@nummultiplechoice=\count300
@@ -1191,10 +1191,15 @@ LaTeX Info: Redefining \ttfamily on input line 98.
 .................................................
 . LaTeX info: "xparse/redefine-environment"
 . 
-. Redefining environment 'choices' with sig. 'O{}D(){2}' on line 148.
+. Redefining environment 'choices' with sig. 'O{}D(){2}' on line 182.
 .................................................
 \beforechoicessep=\skip88
 \afterchoicessep=\skip89
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining command \fullanswersheet with sig. 'O{10} O{0} m' on line 237.
+.................................................
 )
 (./MidtermTemplate.aux)
 \openout1 = `MidtermTemplate.aux'.
@@ -1311,19 +1316,19 @@ LaTeX Font Info:    Font shape `TU/THSarabun(0)/m/n' will be
  [3
 
 ] [4]
-This exam contains 2 questions with 2 parts, 0 subparts, and 0 subsubparts.
+This exam contains 6 questions with 2 parts, 0 subparts, and 0 subsubparts.
 (./MidtermTemplate.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 28111 strings out of 493068
- 560374 string characters out of 6135636
- 619123 words of memory out of 5000000
- 31626 multiletter control sequences out of 15000+600000
+ 28138 strings out of 493068
+ 560775 string characters out of 6135636
+ 619406 words of memory out of 5000000
+ 31653 multiletter control sequences out of 15000+600000
  9082 words of font info for 54 fonts, out of 8000000 for 9000
  1347 hyphenation exceptions out of 8191
- 68i,10n,71p,10370b,844s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 68i,10n,72p,10370b,885s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on MidtermTemplate.pdf (6 pages).
