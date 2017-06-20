@@ -152,7 +152,7 @@
 %============================================================================================%
 % Set up for cover pages,
 
-\newcommand\asteriskfill{\leavevmode\xleaders\hbox{$\ast\ $}\hfill\kern0pt}
+\newcommand\asteriskfill{\noindent\leavevmode\xleaders\hbox{$\ast\ $}\hfill\kern0pt}
 
 
 
@@ -421,31 +421,58 @@
 }%
 }
 
-\newcommand*\UnbreakableShortAnswerSheet[3][7cm]{%
+%\newcommand*\UnbreakableShortAnswerSheet[3][7cm]{%
+%% #1: length of fill with dotted lines
+%% #2: totcounter with number of short answer questions
+%% #3: totounter with number of questions before the start of short answer. i.e., If the number is 30, it starts at 31
+%\let\@openitem\minipage
+%\let\@closeitem\relax
+%\pgfmathtruncatemacro\@X@totalvalue{#2}%
+%\pgfmathtruncatemacro\@shortanswer@startvalue{#3}%
+%\setcounter{loop@X}{\@X@totalvalue}%
+%\setcounter{loop@shortanswer}{\@shortanswer@startvalue}%
+%\vspace{1em}%
+%% Short Answers: X is \theX Y is \theY  and we have \numquestions and as ewll \thenumshortanswer%
+%\begin{enumerate}%
+%\setcounter{enumi}{\@shortanswer@startvalue}%
+%\forloop[-1]{loop@X}{\value{loop@X}}{\value{loop@X}>0}{%
+%	\@closeitem
+%	\minipage{\textwidth}
+%	\item \dotfill\vspace{-0.7em}%
+%		\fillwithdottedlines{#1}%
+%	\let\@closeitem\endminipage%
+%	\par%
+%}%
+%\@closeitem%
+%\end{enumerate}%
+%}
+
+
+\newcommand*\UnbreakableShortAnswerSheet[3][5]{%
 % #1: length of fill with dotted lines
-% #2: totcounter with number of short answer questions
-% #3: totounter with number of questions before the start of short answer. i.e., If the number is 30, it starts at 31
-\let\@openitem\minipage
-\let\@closeitem\relax
-\pgfmathtruncatemacro\@X@totalvalue{#2}%
-\pgfmathtruncatemacro\@shortanswer@startvalue{#3}%
+% #2: number of short answer questions
+% #3: number of questions before the start of short answer. i.e., If the number is 30, it starts at 31
+\pgfmathtruncatemacro\@X@totalvalue{#2}
+\pgfmathtruncatemacro\@Y@value{#1}
+\pgfmathtruncatemacro\@shortanswer@startvalue{#3}
 \setcounter{loop@X}{\@X@totalvalue}%
-\setcounter{loop@shortanswer}{\@shortanswer@startvalue}%
-\vspace{1em}%
+\setcounter{loop@Y}{\@Y@value}
+%\edef\@shortanswer@totalvalue{\totalvalue{#3}}
 % Short Answers: X is \theX Y is \theY  and we have \numquestions and as ewll \thenumshortanswer%
+\vspace{1em}%
 \begin{enumerate}%
-\setcounter{enumi}{\@shortanswer@startvalue}%
+\let\@closeitem\relax
+\def\unbreakableitem{\@closeitem\item\minipage[t]{\textwidth}\let\@closeitem\endminipage}
+\setcounter{enumi}{\@shortanswer@startvalue}
 \forloop[-1]{loop@X}{\value{loop@X}}{\value{loop@X}>0}{%
-	\@closeitem
-	\minipage{\textwidth}
-	\item \dotfill\vspace{-0.7em}%
-		\fillwithdottedlines{#1}%
-	\let\@closeitem\endminipage
+	\unbreakableitem \dotfill\vspace{\newdottedlineheight}%
+	\forloop[-1]{loop@Y}{#1}{\value{loop@Y}>0}{%
+	\newline\vspace{\newdottedlineheight}\mbox{}\dotfill%
+	} %
 }%
-\@closeitem%
+\@closeitem
 \end{enumerate}%
 }
-
 
 \newcommand*\ShortAnswerSheet[3][5]{%
 % #1: length of fill with dotted lines
