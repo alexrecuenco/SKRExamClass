@@ -13,7 +13,7 @@
 \newtotcounter{totalpages}
 \newtotcounter{totalsections}
 
-
+\newcommand{\myversion}{} % DO NOT DELETE IF YOU WANT RANDOMIZATION LATER ON
 
 
 \newcommand*\SchoolName{{\large Suankularb wittayalai Rangsit School}}
@@ -35,9 +35,23 @@
 
 \renewcommand*\HeaderClassTH{601 -- 602}
 
-\newcommand*\LearningOutCome{%
+
+
+
+
+\renewcommand*\LearningOutcome{%
 1.  The student should be able to understand rate of change by making connections between average rate of change over an interval and instantaneous rate of change at a point, using the slopes of secants and tangents and the concepts of the limit. Graph the derivatives of polynomial, sinusoidal, and exponential functions, and make connections between the numeric, graphical, and algebraic representations f a function and its derivative. Verify graphically and algebraically the riles for determining derivatives; apply these rules to determine the derivatives of polynomial, sinusoidal, exponential, rational, and radical functions, and simple combinations of functions; and solve related problems. (No. 1-\ntotalquestion)
 }
+\renewcommand*\CoverpageInstructionsPartsTH{%
+ข้อสอบฉบับนี้มีจำนวน \total{totalsections} ตอน  จำนวน \total{totalpages} หน้า \VersionInfoTH{\myversion}
+}
+\renewcommand*\CoverpageInstructionsPartsTHDescription{%
+		\begin{itemize}
+			\item[] ตอนที่ 1 เป็นแบบปรนัย 4 ตัวเลือก จำนวน \nmultiplechoice\ ข้อ 8 คะแนน
+			\item[] ตอนที่ 2 เป็นแบบอัตนัย จำนวน \nshortanswer\ ข้อ 12 คะแนน		
+		\end{itemize}
+}
+
 
 \graphicspath{{images/}}
 
@@ -78,64 +92,7 @@
 	
 \cleardoublepage
 
-\begin{coverpages}
-	\coverpagefont
-	\begin{center}
-	
-	\includegraphics{SKRsmall.png}
-	
-	\coverpagefont
-	
-	\SchoolNameTH
-	
-	\end{center}
-	
-	\ThaiDescription
-		
-	\begin{enumerate}
-		\item ข้อสอบฉบับนี้มีจำนวน \total{totalsections} ตอน  จำนวน \total{totalpages} หน้า
-		\begin{itemize}
-			\item[] ตอนที่ 1 เป็นแบบปรนัย 4 ตัวเลือก จำนวน \nmultiplechoice\ ข้อ 8 คะแนน
-			\item[] ตอนที่ 2 เป็นแบบอัตนัย จำนวน \nshortanswer\ ข้อ 12 คะแนน		
-		\end{itemize}
-		\item ก่อนทำข้อสอบให้เขียนชื่อ-นามสกุล ห้อง เลขที่สอบ และเลขที่ห้องสอบ\underline{ในข้อสอบ}
-		\item ไม่อนุญาตให้นักเรียนที่มาช้ากว่าเวลาเริ่มสอบ 15 นาทีเข้าห้องสอบ
-		\item ไม่อนุญาตให้นักเรียนออกจากห้องสอบก่อนหมดเวลาสอบ
-		\item นักเรียนสามารถทด ขีด เขียน คำตอบ ลงในข้อสอบได้
-		\item ให้นักเรียนส่งข้อสอบและกระดาษคำตอบคืนกรรมการกำกับการสอบและห้ามนำเอกสารการสอบ
-		\item ออกนอกห้องสอบ\underline{\textbf{โดยเด็ดขาด}}
-	\end{enumerate}
-	
-	\vspace{\stretch{0.5}}
-	
-	\asteriskfill
-	
-	\vspace{\stretch{1}}
-	
-	\noindent\underline{มาตรฐานการเรียนรู้/ตัวชี้วัด/ผลการเรียนรู้}\relax
-	\vspace{\stretch{0.5}}
-	
-	\LearningOutCome
-	
-	\vspace{\stretch{0.5}}
-
-	\asteriskfill
-	
-	\vspace{\stretch{1}}
-	
-	\begin{tcolorbox}[halign upper = center]
-	
-	เอกสารนี้เป็นเอกสารสงวนสิทธิ์ของโรงเรียนสวนกุหลาบวิทยาลัย รังสิต
-	
-	ห้ามเผยแพร่  อ้างอิง ก่อนได้รับอนุญาต  ทางโรงเรียนฯ 
-	
-	จะย่อยทำลายข้อสอบและกระดาษคำตอบทั้งหมด หลังจากประกาศผลสอบแล้ว 3เดือน
-
-	\end{tcolorbox}
-	
-	\cleardoublepage
-
-\end{coverpages}
+\FullStandardTHCoverPage
 
 \pagestyle{headandfoot}
 \runningheader{}{\resizebox{\textwidth}{!}{\HeaderDescription}}{}

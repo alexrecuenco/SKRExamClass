@@ -21,7 +21,7 @@
 %
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{skrexam}[2017/06/20 Exam Class With SKR School Format]
+\ProvidesClass{skrexam}[2017/06/21 Exam Class With SKR School Format]
 
 \newif\ifcoverpagefont
 \coverpagefontfalse
@@ -150,10 +150,13 @@
 
 
 %============================================================================================%
-% Set up for cover pages,
+% Set up for fill-in information for the exam,
 
 \newcommand\asteriskfill{\noindent\leavevmode\xleaders\hbox{$\ast\ $}\hfill\kern0pt}
 
+\newcommand*\VersionInfoTHDescription{ฉบับที่}
+\newcommand*\VersionInfo[1]{\IfInteger{#1}{(version #1)}{\relax}}
+\newcommand*\VersionInfoTH[1]{\IfInteger{#1}{(\VersionInfoTHDescription\ #1)}{\relax}}
 
 
 %Filling information
@@ -173,7 +176,13 @@
 \newcommand*\Score{}
 \newcommand*\ScoreTH{}
 \newcommand*\HeaderClassTH{}
-
+\newcommand*\CoverpageInstructionsPartsTH{%
+	% References specifically one exam, must be done yourself
+}
+\newcommand*\CoverpageInstructionsPartsTHDescription{%
+}
+\newcommand*{\LearningOutcome}{%
+}
 
 %English Cover page
 
@@ -224,21 +233,119 @@
 	เลขที่\hrulefill\  %
 	ห้องสอบเลขที่\hrulefill}
 
-\newcommand*\ThaiDescription{
+\newcommand*\ThaiCoverpageHeader{%
 	\noindent%
 	\FullExamTHLine\linebreak%
 	\SubjectExamTHLine\linebreak%
-	\FillNameTHLine\linebreak%
+	\FillNameTHLine%
+	}
+
+
+\newcommand*\ThaiDescription{% This command is here to conserve compatibility, try to remove it soon!
+	\ThaiCoverpageHeader
 	
 	\asteriskfill%
 	}
 
+%%% From here on, I am going to make assumptions when using the commands, these could be changed easily, and hopefully the templates will emphasize in the preamble to fill these commands oneselve
 
-% Header Exam
+\newcommand*\CoverpageImage{% We assume a SKRsmaal.png to be searchable on the path
+\includegraphics{SKRsmall.png}
+}
+
+
+
+
+\newcommand*\CoverpageEnumeratedInstructionsTH{%
+	\underline{คำชี้แจง}
+	
+	\begin{enumerate}
+		\item \CoverpageInstructionsPartsTH
+			\CoverpageInstructionsPartsTHDescription
+		\item ก่อนทำข้อสอบให้เขียนชื่อ-นามสกุล ห้อง เลขที่สอบ และเลขที่ห้องสอบ\underline{ในข้อสอบ}
+		\item ไม่อนุญาตให้นักเรียนที่มาช้ากว่าเวลาเริ่มสอบ 15 นาทีเข้าห้องสอบ
+		\item ไม่อนุญาตให้นักเรียนออกจากห้องสอบก่อนหมดเวลาสอบ
+		\item นักเรียนสามารถทด ขีด เขียน คำตอบ ลงในข้อสอบได้
+		\item ให้นักเรียนส่งข้อสอบและกระดาษคำตอบคืนกรรมการกำกับการสอบและห้ามนำเอกสารการสอบ
+		\item ออกนอกห้องสอบ\underline{\textbf{โดยเด็ดขาด}}
+	\end{enumerate}
+}
+
+
+\newcommand*\LearningOutcomeTHDescription{%
+\noindent\underline{มาตรฐานการเรียนรู้/ตัวชี้วัด/ผลการเรียนรู้}\relax%
+}
+
+
+\newcommand*\CoverpageBoxedTHDescription{%
+	\begin{tcolorbox}[halign upper = center]
+	
+	เอกสารนี้เป็นเอกสารสงวนสิทธิ์ของโรงเรียนสวนกุหลาบวิทยาลัย รังสิต
+	
+	ห้ามเผยแพร่  อ้างอิง ก่อนได้รับอนุญาต  ทางโรงเรียนฯ 
+	
+	จะย่อยทำลายข้อสอบและกระดาษคำตอบทั้งหมด หลังจากประกาศผลสอบแล้ว 3เดือน
+
+	\end{tcolorbox}
+}
+
+%Full automated cover page following the standard format defined by the school
+
+\newcommand*\FullStandardTHCoverPage{%
+\begin{coverpages}
+	\coverpagefont
+	\begin{center}
+	
+	\CoverpageImage
+	
+	\coverpagefont
+	
+	\SchoolNameTH
+	
+	\end{center}
+	
+	\ThaiCoverpageHeader
+	
+	\asteriskfill
+	
+	\vspace{\stretch{1}}
+
+	\CoverpageEnumeratedInstructionsTH
+	
+	\vspace{\stretch{0.5}}
+	
+	\asteriskfill
+	
+	\vspace{\stretch{1}}
+	
+	\LearningOutcomeTHDescription
+	
+	\vspace{\stretch{0.5}}
+	
+	\LearningOutcome
+	
+	\vspace{\stretch{0.5}}
+
+	\asteriskfill
+	
+	\vspace{\stretch{1}}
+	
+	\CoverpageBoxedTHDescription
+		
+	\cleardoublepage
+
+\end{coverpages}%
+}
+
+
+% Header Exam 
 \newcommand*\HeaderClassTHDescription{ห้อง ม.}
 \newcommand*\PageTHDescription{หน้า}
 
 \newcommand*\HeaderDescription{\ExamNameTH\ \AcademicYearTHDescription\ \AcademicYearTH\ \SubjectTHDescription\ \SubjectTH \CodeTHDescription\ \Code\ \HeaderClassTHDescription \HeaderClassTH \PageTHDescription\ \thepage}
+
+
+
 
 
 %\setmathsfont(Digits){TH Sarabun New}
