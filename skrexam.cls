@@ -150,9 +150,13 @@
 
 
 %============================================================================================%
-% Set up for cover pages,
+% Set up for fill-in information for the exam,
 
 \newcommand\asteriskfill{\noindent\leavevmode\xleaders\hbox{$\ast\ $}\hfill\kern0pt}
+
+\newcommand*\VersionInfoTHDescription{ฉบับที่}
+\newcommand*\VersionInfo[1]{\IfInteger{#1}{(version #1)}{\relax}}
+\newcommand*\VersionInfoTH[1]{\IfInteger{#1}{(\VersionInfoTHDescription\ #1)}{\relax}}
 
 
 %Filling information
@@ -172,7 +176,13 @@
 \newcommand*\Score{}
 \newcommand*\ScoreTH{}
 \newcommand*\HeaderClassTH{}
-
+\newcommand*\CoverpageInstructionsPartsTH{%
+	% References specifically one exam, must be done yourself
+}
+\newcommand*\CoverpageInstructionsPartsTHDescription{%
+}
+\newcommand*{\LearningOutcome}{%
+}
 
 %English Cover page
 
@@ -223,52 +233,35 @@
 	เลขที่\hrulefill\  %
 	ห้องสอบเลขที่\hrulefill}
 
-\newcommand*\ThaiDescription{
+\newcommand*\ThaiCoverpageHeader{%
 	\noindent%
 	\FullExamTHLine\linebreak%
 	\SubjectExamTHLine\linebreak%
-	\FillNameTHLine\linebreak%
+	\FillNameTHLine%
+	}
+
+
+\newcommand*\ThaiDescription{% This command is here to conserve compatibility, try to remove it soon!
+	\ThaiCoverpageHeader
 	
 	\asteriskfill%
 	}
 
+%%% From here on, I am going to make assumptions when using the commands, these could be changed easily, and hopefully the templates will emphasize in the preamble to fill these commands oneselve
 
-% Header Exam
-\newcommand*\HeaderClassTHDescription{ห้อง ม.}
-\newcommand*\PageTHDescription{หน้า}
-
-\newcommand*\HeaderDescription{\ExamNameTH\ \AcademicYearTHDescription\ \AcademicYearTH\ \SubjectTHDescription\ \SubjectTH \CodeTHDescription\ \Code\ \HeaderClassTHDescription \HeaderClassTH \PageTHDescription\ \thepage}
-
+\newcommand*\CoverpageImage{% We assume a SKRsmaal.png to be searchable on the path
+\includegraphics{SKRsmall.png}
+}
 
 
-\newcommand*\VersionInfoTHDescription{version}
-\newcommand*\VersionInfo[1]{\IfInteger{#1}{(version #1)}{\relax}}
-\newcommand*\VersionInfoTH[1]{\IfInteger{#1}{(\VersionInfoTHDescription\ #1)}{\relax}}
 
 
-\newcommand\FullStandardTHCoverPage[1][]{%
-\begin{coverpages}
-	\coverpagefont
-	\begin{center}
-	
-	\includegraphics{SKRsmall.png}
-	
-	\coverpagefont
-	
-	\SchoolNameTH
-	
-	\end{center}
-	
-	\ThaiDescription
-	
+\newcommand*\CoverpageEnumeratedInstructionsTH{%
 	\underline{คำชี้แจง}
 	
 	\begin{enumerate}
-		\item ข้อสอบฉบับนี้มีจำนวน \total{totalsections} ตอน  จำนวน \total{totalpages} หน้า \versioninfo{#1}
-		\begin{itemize}
-			\item[] ตอนที่ 1 เป็นแบบปรนัย 4 ตัวเลือก จำนวน \nmultiplechoice\ ข้อ 8 คะแนน
-			\item[] ตอนที่ 2 เป็นแบบอัตนัย จำนวน \nshortanswer\ ข้อ 12 คะแนน		
-		\end{itemize}
+		\item \CoverpageInstructionsPartsTH
+			\CoverpageInstructionsPartsTHDescription
 		\item ก่อนทำข้อสอบให้เขียนชื่อ-นามสกุล ห้อง เลขที่สอบ และเลขที่ห้องสอบ\underline{ในข้อสอบ}
 		\item ไม่อนุญาตให้นักเรียนที่มาช้ากว่าเวลาเริ่มสอบ 15 นาทีเข้าห้องสอบ
 		\item ไม่อนุญาตให้นักเรียนออกจากห้องสอบก่อนหมดเวลาสอบ
@@ -276,24 +269,15 @@
 		\item ให้นักเรียนส่งข้อสอบและกระดาษคำตอบคืนกรรมการกำกับการสอบและห้ามนำเอกสารการสอบ
 		\item ออกนอกห้องสอบ\underline{\textbf{โดยเด็ดขาด}}
 	\end{enumerate}
-	
-	\vspace{\stretch{0.5}}
-	
-	\asteriskfill
-	
-	\vspace{\stretch{1}}
-	
-	\noindent\underline{มาตรฐานการเรียนรู้/ตัวชี้วัด/ผลการเรียนรู้}\relax
-	\vspace{\stretch{0.5}}
-	
-	\LearningOutCome
-	
-	\vspace{\stretch{0.5}}
+}
 
-	\asteriskfill
-	
-	\vspace{\stretch{1}}
-	
+
+\newcommand*\LearningOutcomeTHDescription{%
+\noindent\underline{มาตรฐานการเรียนรู้/ตัวชี้วัด/ผลการเรียนรู้}\relax%
+}
+
+
+\newcommand*\CoverpageBoxedTHDescription{%
 	\begin{tcolorbox}[halign upper = center]
 	
 	เอกสารนี้เป็นเอกสารสงวนสิทธิ์ของโรงเรียนสวนกุหลาบวิทยาลัย รังสิต
@@ -303,11 +287,66 @@
 	จะย่อยทำลายข้อสอบและกระดาษคำตอบทั้งหมด หลังจากประกาศผลสอบแล้ว 3เดือน
 
 	\end{tcolorbox}
+}
+
+%Full automated cover page following the standard format defined by the school
+
+\newcommand*\FullStandardTHCoverPage{%
+\begin{coverpages}
+	\coverpagefont
+	\begin{center}
 	
+	\CoverpageImage
+	
+	\coverpagefont
+	
+	\SchoolNameTH
+	
+	\end{center}
+	
+	\ThaiCoverpageHeader
+	
+	\asteriskfill
+	
+	\vspace{\stretch{1}}
+
+	\CoverpageEnumeratedInstructionsTH
+	
+	\vspace{\stretch{0.5}}
+	
+	\asteriskfill
+	
+	\vspace{\stretch{1}}
+	
+	\LearningOutcomeTHDescription
+	
+	\vspace{\stretch{0.5}}
+	
+	\LearningOutcome
+	
+	\vspace{\stretch{0.5}}
+
+	\asteriskfill
+	
+	\vspace{\stretch{1}}
+	
+	\CoverpageBoxedTHDescription
+		
 	\cleardoublepage
 
-\end{coverpages}
+\end{coverpages}%
 }
+
+
+% Header Exam 
+\newcommand*\HeaderClassTHDescription{ห้อง ม.}
+\newcommand*\PageTHDescription{หน้า}
+
+\newcommand*\HeaderDescription{\ExamNameTH\ \AcademicYearTHDescription\ \AcademicYearTH\ \SubjectTHDescription\ \SubjectTH \CodeTHDescription\ \Code\ \HeaderClassTHDescription \HeaderClassTH \PageTHDescription\ \thepage}
+
+
+
+
 
 %\setmathsfont(Digits){TH Sarabun New}
 
