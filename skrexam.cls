@@ -21,7 +21,7 @@
 %
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{skrexam}[2017/06/20 Exam Class With SKR School Format]
+\ProvidesClass{skrexam}[2017/06/21 Exam Class With SKR School Format]
 
 \newif\ifcoverpagefont
 \coverpagefontfalse
@@ -155,7 +155,6 @@
 \newcommand\asteriskfill{\noindent\leavevmode\xleaders\hbox{$\ast\ $}\hfill\kern0pt}
 
 
-
 %Filling information
 
 \newcommand*\ExamName{}
@@ -240,6 +239,75 @@
 
 \newcommand*\HeaderDescription{\ExamNameTH\ \AcademicYearTHDescription\ \AcademicYearTH\ \SubjectTHDescription\ \SubjectTH \CodeTHDescription\ \Code\ \HeaderClassTHDescription \HeaderClassTH \PageTHDescription\ \thepage}
 
+
+
+\newcommand*\VersionInfoTHDescription{version}
+\newcommand*\VersionInfo[1]{\IfInteger{#1}{(version #1)}{\relax}}
+\newcommand*\VersionInfoTH[1]{\IfInteger{#1}{(\VersionInfoTHDescription\ #1)}{\relax}}
+
+
+\newcommand\FullStandardTHCoverPage[1][]{%
+\begin{coverpages}
+	\coverpagefont
+	\begin{center}
+	
+	\includegraphics{SKRsmall.png}
+	
+	\coverpagefont
+	
+	\SchoolNameTH
+	
+	\end{center}
+	
+	\ThaiDescription
+	
+	\underline{คำชี้แจง}
+	
+	\begin{enumerate}
+		\item ข้อสอบฉบับนี้มีจำนวน \total{totalsections} ตอน  จำนวน \total{totalpages} หน้า \versioninfo{#1}
+		\begin{itemize}
+			\item[] ตอนที่ 1 เป็นแบบปรนัย 4 ตัวเลือก จำนวน \nmultiplechoice\ ข้อ 8 คะแนน
+			\item[] ตอนที่ 2 เป็นแบบอัตนัย จำนวน \nshortanswer\ ข้อ 12 คะแนน		
+		\end{itemize}
+		\item ก่อนทำข้อสอบให้เขียนชื่อ-นามสกุล ห้อง เลขที่สอบ และเลขที่ห้องสอบ\underline{ในข้อสอบ}
+		\item ไม่อนุญาตให้นักเรียนที่มาช้ากว่าเวลาเริ่มสอบ 15 นาทีเข้าห้องสอบ
+		\item ไม่อนุญาตให้นักเรียนออกจากห้องสอบก่อนหมดเวลาสอบ
+		\item นักเรียนสามารถทด ขีด เขียน คำตอบ ลงในข้อสอบได้
+		\item ให้นักเรียนส่งข้อสอบและกระดาษคำตอบคืนกรรมการกำกับการสอบและห้ามนำเอกสารการสอบ
+		\item ออกนอกห้องสอบ\underline{\textbf{โดยเด็ดขาด}}
+	\end{enumerate}
+	
+	\vspace{\stretch{0.5}}
+	
+	\asteriskfill
+	
+	\vspace{\stretch{1}}
+	
+	\noindent\underline{มาตรฐานการเรียนรู้/ตัวชี้วัด/ผลการเรียนรู้}\relax
+	\vspace{\stretch{0.5}}
+	
+	\LearningOutCome
+	
+	\vspace{\stretch{0.5}}
+
+	\asteriskfill
+	
+	\vspace{\stretch{1}}
+	
+	\begin{tcolorbox}[halign upper = center]
+	
+	เอกสารนี้เป็นเอกสารสงวนสิทธิ์ของโรงเรียนสวนกุหลาบวิทยาลัย รังสิต
+	
+	ห้ามเผยแพร่  อ้างอิง ก่อนได้รับอนุญาต  ทางโรงเรียนฯ 
+	
+	จะย่อยทำลายข้อสอบและกระดาษคำตอบทั้งหมด หลังจากประกาศผลสอบแล้ว 3เดือน
+
+	\end{tcolorbox}
+	
+	\cleardoublepage
+
+\end{coverpages}
+}
 
 %\setmathsfont(Digits){TH Sarabun New}
 
