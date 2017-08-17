@@ -403,10 +403,11 @@
 \RenewTasks[
 	label-format = \bfseries,
 	counter-format = {tsk[1].},
-	item-indent = 3em,
-	label-offset = 1em,
+	item-indent = 30pt,
+	label-offset = 10pt,
 	label-align = left,
-	after-item-skip = 3pt plus 2em
+	after-item-skip = 3pt plus 2em,
+	column-sep = 15pt
 	]{choices}[\choice](2)
 
 %\makeatletter
