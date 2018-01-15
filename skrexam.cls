@@ -106,6 +106,7 @@
 \RequirePackage{xunicode} 
 \RequirePackage{xltxtra} 
 \RequirePackage{xparse}
+\RequirePackage{graphicx}
 	\usetikzlibrary{calc}
 \ifflushbottom%
 	\flushbottom%
@@ -511,7 +512,7 @@
 	\answersheetrow[\nlast]%
 \fi%
 }
-\DeclareDocumentCommand{\MultipleChoiceAnswerSheetThai}{O{10} O{0} m}{%
+\DeclareDocumentCommand{\InformalAnswerSheet}{O{10} O{0} m}{%
 % #1: Number of questions per column on the answer sheet
 % #2: Starting question number minus one.
 % #3: Total number of questions
