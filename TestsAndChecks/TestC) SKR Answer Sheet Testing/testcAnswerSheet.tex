@@ -5,7 +5,7 @@
 % e-mail safale93@gmail.com
 
 
-\documentclass[noquestionbreak]{../skrexam}  %Draft option also removes the pictures
+\documentclass[noquestionbreak]{../../skrexam}  %Draft option also removes the pictures
 
 \usepackage{tcolorbox}
 
@@ -65,15 +65,24 @@
 
 \end{center}
 
+TEST OF ANSWER SHEETS
+
 \section*{Part 1 --- Choose the correct answer. (1 -- \nmultiplechoice)} %Short Answer	
 
 
+\verb|\quad\quad\MultipleChoiceAnswerSheet[10]{\nmultiplechoice}[4]|
+
 \quad\quad\MultipleChoiceAnswerSheet[10]{\nmultiplechoice}[4]
 
+\verb|\fullanswersheet[10]{\nmultiplechoice}|
+\nopagebreak
+
+\fullanswersheet[10]{\nmultiplechoice}
 \pgfmathtruncatemacro\nextnmultiplechoice{\nmultiplechoice+1}
 
 \section*{Part 2 --- Write your Answer. (\nextnmultiplechoice -- \total{questionnumber})} %Short Answer	
 
+\verb|\ShortAnswerSheet[10]{\nshortanswer}{\nmultiplechoice}|
 
 \ShortAnswerSheet[10]{\nshortanswer}{\nmultiplechoice}
 	
@@ -139,13 +148,28 @@
 \runningheadrule
 
 
-\section{First section}
+\section{First section}\noindent
+
+this is a section
+
+
 \begin{questions}
 	\question
 	1st question
+	\begin{choices}
+	\choice hello
+	\choice nope
+	\end{choices}
+	
 	\question 2nd question
+	\begin{choices}
+	\choice hello
+	\choice nope
+	\end{choices}
 \end{questions}
 
+
+hi
 
 \section{another section}
 \newpage

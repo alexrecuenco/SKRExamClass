@@ -1,0 +1,178 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+% Created by Alejandro Gonzalez Recuenco, 2017
+% Do not share outside of BFITS
+% e-mail safale93@gmail.com
+
+
+\documentclass[noquestionbreak, customfontpath=../Fonts/]{../../skrexam}  %Draft option also removes the pictures
+
+\usepackage{tcolorbox}
+
+\tcbset{colback = white}
+\newtotcounter{totalpages}
+\newtotcounter{totalsections}
+
+%flushbottom as option
+\input{easysetup.tex}
+
+
+
+\newcommand*\SchoolName{{\large Suankularb wittayalai Rangsit School}}
+\newcommand*\SchoolNameTH{\textbf{\Large โรงเรียนสวนกุหลาบวิทยาลัย รังสิต}}
+\renewcommand*\ExamName{Mid-Term Exam of Semester One}
+\renewcommand*\ExamNameTH{ข้อสอบวัดผลกลางภาค ภาคเรียนที่ 1}
+\renewcommand*\AcademicYear{2017}
+\renewcommand*\AcademicYearTH{2560}
+\renewcommand*\GradeLevel{M.501,M.502}
+\renewcommand*\GradeLevelTH{501,502}
+\renewcommand*\Subject{Supplemental Mathematics 3}
+\renewcommand*\SubjectTH{\Subject}
+\renewcommand*\Code{ค32205}
+\renewcommand*\CodeTH{\Code}
+\renewcommand*\Time{90 minutes}
+\renewcommand*\TimeTH{90 นาที}
+\renewcommand*\Score{20 marks}
+\renewcommand*\ScoreTH{20 คะแนน}
+
+\renewcommand*\HeaderClassTH{601 -- 602}
+
+\newcommand*\LearningOutCome{%
+1.  The student should be able to understand rate of change by making connections between average rate of change over an interval and instantaneous rate of change at a point, using the slopes of secants and tangents and the concepts of the limit. Graph the derivatives of polynomial, sinusoidal, and exponential functions, and make connections between the numeric, graphical, and algebraic representations f a function and its derivative. Verify graphically and algebraically the riles for determining derivatives; apply these rules to determine the derivatives of polynomial, sinusoidal, exponential, rational, and radical functions, and simple combinations of functions; and solve related problems. (No. 1-\ntotalquestion)
+}
+
+\graphicspath{{images/}}
+
+%<Header & Footer>%
+\pagestyle{headandfoot}
+\firstpagefooter{}{\thepage}{}
+\runningfooter{}{\thepage}{}
+
+
+
+\begin{document}
+
+\global\edef\nmultiplechoice{\totalvalue{nummultiplechoice}}
+\global\edef\ntotalquestion{\totalvalue{questionnumber}}
+\global\edef\nshortanswer{\totalvalue{numshortanswer}}
+
+\begin{center}
+\includegraphics{SKRsmall.png}
+
+\SchoolName
+
+\EnglishDescription
+
+\end{center}
+
+\section*{Part 1 --- Choose the correct answer. (1 -- \nmultiplechoice)} %Short Answer	
+
+
+\quad\quad\MultipleChoiceAnswerSheet[10]{\nmultiplechoice}[4]
+
+\pgfmathtruncatemacro\nextnmultiplechoice{\nmultiplechoice+1}
+
+\section*{Part 2 --- Write your Answer. (\nextnmultiplechoice -- \total{questionnumber})} %Short Answer	
+
+
+\ShortAnswerSheet[10]{\nshortanswer}{\nmultiplechoice}
+	
+	
+\cleardoublepage
+
+\begin{coverpages}
+	\coverpagefont
+	\begin{center}
+	
+	\includegraphics{SKRsmall.png}
+	
+	\coverpagefont
+	
+	\SchoolNameTH
+	
+	\end{center}
+	
+	\ThaiDescription
+		
+	\begin{enumerate}
+		\item ข้อสอบฉบับนี้มีจำนวน \total{totalsections} ตอน  จำนวน \total{totalpages} หน้า
+		\begin{itemize}
+			\item[] ตอนที่ 1 เป็นแบบปรนัย 4 ตัวเลือก จำนวน \nmultiplechoice\ ข้อ 8 คะแนน
+			\item[] ตอนที่ 2 เป็นแบบอัตนัย จำนวน \nshortanswer\ ข้อ 12 คะแนน		
+		\end{itemize}
+		\item ก่อนทำข้อสอบให้เขียนชื่อ-นามสกุล ห้อง เลขที่สอบ และเลขที่ห้องสอบ\underline{ในข้อสอบ}
+		\item ไม่อนุญาตให้นักเรียนที่มาช้ากว่าเวลาเริ่มสอบ 15 นาทีเข้าห้องสอบ
+		\item ไม่อนุญาตให้นักเรียนออกจากห้องสอบก่อนหมดเวลาสอบ
+		\item นักเรียนสามารถทด ขีด เขียน คำตอบ ลงในข้อสอบได้
+		\item ให้นักเรียนส่งข้อสอบและกระดาษคำตอบคืนกรรมการกำกับการสอบและห้ามนำเอกสารการสอบ
+		\item ออกนอกห้องสอบ\underline{\textbf{โดยเด็ดขาด}}
+	\end{enumerate}
+	
+	
+	\asteriskfill
+	
+	
+	\begin{center}
+	\underline{มาตรฐานการเรียนรู้/ตัวชี้วัด/ผลการเรียนรู้}
+	\end{center}
+	
+	\LearningOutCome
+	
+	\vspace{\stretch{1}}
+
+	\asteriskfill
+	
+	\vspace{\stretch{1}}
+	
+	\begin{tcolorbox}[halign upper = center]
+	
+	เอกสารนี้เป็นเอกสารสงวนสิทธิ์ของโรงเรียนสวนกุหลาบวิทยาลัย รังสิต
+	
+	ห้ามเผยแพร่  อ้างอิง ก่อนได้รับอนุญาต  ทางโรงเรียนฯ 
+	\end{tcolorbox}
+
+\end{coverpages}
+
+\pagestyle{headandfoot}
+\runningheader{}{\resizebox{\textwidth}{!}{\HeaderDescription}}{}
+
+\runningheadrule
+
+
+\section{First section}\noindent
+
+this is a section
+
+
+\begin{questions}
+	\question
+	1st question
+	\begin{choices}
+	\choice hello
+	\choice nope
+	\end{choices}
+	
+	\question 2nd question
+	\begin{choices}
+	\choice hello
+	\choice nope
+	\end{choices}
+\end{questions}
+
+
+hi
+
+\section{another section}
+\newpage
+
+\section{another section}
+
+\setcounter{totalpages}{\value{page}}
+\setcounter{totalsections}{\value{section}}
+\end{document}
+
+
+
+
+
+

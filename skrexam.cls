@@ -8,7 +8,8 @@
 % Options for the class:
 % systemfonts: If this option is activated it tries to find the fonts for SKR on the system fonts, under the name THH SarabunPSK. Otherwise it will try to find the fonts in the local path Fonts/ with the name THSarabun.
 % flushbottom: Self explanatory
-% noquestionbreak: Prevents breaks after question and before choices, and prevent any break between paragraphs as a side effect. The whole chunk will be flushed out to the enxt page if it is needed.
+% noquestionbreak: Prevents breaks after question and before choices, and prevent any break between paragraphs as a side effect. The whole chunk will be flushed out to the next page if it is needed.
+% customfontpath:  Keyval option that specifies where are the fonts found. If systemfonts is selected as well, the SKR fonts are ignored, and only the Angs fonts are found on the custom folder.
 % The shortanswer environment works 
 %
 % v 0.2:
@@ -18,10 +19,20 @@
 %		Fonts/ In the current path (default behaviour)
 %		Or using system fonts installed with the required name 
 %			(Add the option systemfonts for this)
-%
+% v 0.3:
+%   Added keyvalue support for where to find the fonts, customfontpath
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{skrexam}[2017/06/21 Exam Class With SKR School Format]
+\ProvidesClass{skrexam}[2018/01/14 Exam Class With SKR School Format]
+
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{% 
+	family=skr,%
+	prefix=skr@%
+}
+
+
+%TODO: Switch to using \DeclareBoolOptions
 
 \newif\ifcoverpagefont
 \coverpagefontfalse
@@ -31,6 +42,9 @@
 
 \newif\ifnoquestionbreak
 \noquestionbreakfalse
+
+\newif\if@skr@systemfonts
+\@skr@systemfontsfalse
 
 
 \newcommand*\skr@angs@fontpath{Path=Fonts/,}%
@@ -46,31 +60,34 @@
 \newcommand*\skr@bolditalicfont{THSarabun Bold Italic.ttf}
 
 
-\DeclareOption{systemfonts}{%
-\renewcommand*\skr@fontpath{}
+\DeclareVoidOption{systemfonts}{%
+\@skr@systemfontstrue
 \renewcommand*\skr@font{TH SarabunPSK}
 \renewcommand*\skr@boldfont{TH SarabunPSK Bold}
 \renewcommand*\skr@italicfont{TH SarabunPSK Italic}
 \renewcommand*\skr@bolditalicfont{TH SarabunPSK Bold Italic}
-}%	
+}%
 
-\DeclareOption{flushbottom}{%
+\DeclareStringOption[Fonts/]{customfontpath}[Fonts/]
+
+
+\DeclareVoidOption{flushbottom}{%
 \flushbottomtrue%
 }%
 
-\DeclareOption{noquestionbreak}{%
+\DeclareVoidOption{noquestionbreak}{%
 \noquestionbreaktrue%
 }
 
-\DeclareOption{coverpagefont}{%
+\DeclareVoidOption{coverpagefont}{%
 \coverpagefonttrue%
 }
 
 \PassOptionsToClass{12pt, a4paper}{exam}
 
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{exam}}
+\DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{exam}}
  % All other options provided  to skrexam are dumped in the exam class
-\ProcessOptions\relax
+\ProcessKeyvalOptions*
 
 \LoadClass{exam}
 
@@ -89,6 +106,7 @@
 \RequirePackage{xunicode} 
 \RequirePackage{xltxtra} 
 \RequirePackage{xparse}
+\RequirePackage{graphicx}
 	\usetikzlibrary{calc}
 \ifflushbottom%
 	\flushbottom%
@@ -109,6 +127,18 @@
 \XeTeXlinebreaklocale "th"
 \XeTeXlinebreakskip = 0pt plus 1pt   %
 
+
+
+
+\if@skr@systemfonts
+	\edef\skr@fontpath{}
+	\edef\skr@angs@fontpath{Path=\skr@customfontpath,}
+\else
+	\edef\skr@fontpath{Path=\skr@customfontpath,}
+	\edef\skr@angs@fontpath{Path=\skr@customfontpath,}
+\fi
+%\show\skr@fontpath\relax
+%\showthe\skr@fontpath
 
 \setmainfont[%
 	\skr@fontpath%
@@ -463,7 +493,29 @@
 	\end{tikzpicture}%
 }
 
+% \LetDocumentCommand doesn't exist... so I just copy the definition
 \DeclareDocumentCommand{\fullanswersheet}{O{10} O{0} m}{%
+% #1: Number of questions per column on the answer sheet
+% #2: Starting question number minus one.
+% #3: Total number of questions
+\setcounter{q@num}{#2}%
+\pgfmathtruncatemacro{\ntotal}{#3}%
+\pgfmathtruncatemacro{\nrows}{\ntotal / max(#1,1)}%
+\ifnum\nrows>0\relax%
+	\foreach \tenquestion in {1,...,\nrows}{%
+		\answersheetrow[#1]~%
+		%~\answersheetrow[5]~\answersheetrow~\answersheetrow~\answersheetrow
+      		}%
+\fi%
+\pgfmathtruncatemacro{\nlast}{\ntotal-\nrows*#1}%
+\ifnum\nlast>0\relax%
+	\answersheetrow[\nlast]%
+\fi%
+}
+\DeclareDocumentCommand{\InformalAnswerSheet}{O{10} O{0} m}{%
+% #1: Number of questions per column on the answer sheet
+% #2: Starting question number minus one.
+% #3: Total number of questions
 \setcounter{q@num}{#2}%
 \pgfmathtruncatemacro{\ntotal}{#3}%
 \pgfmathtruncatemacro{\nrows}{\ntotal / max(#1,1)}%
