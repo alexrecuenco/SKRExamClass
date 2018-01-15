@@ -250,9 +250,9 @@ In addition to this counters, the following commands are defined at the start of
 
 _If they are not defined, it returns the value "1", to prevent breaking commands that depend on obtaining an integer number as a result_
 
-For the advanced user:
+#### For the curious user:
 
-They are defined using
+They are defined on the templates using
 
 ```latex
 \global\edef\nmultiplechoice{\totalvalue{nummultiplechoice}}
@@ -262,4 +262,9 @@ They are defined using
 % TODO: Add all of those inside a BeforeBeginDocument macro
 ```
 
-Don't touch that, if you don't know what it is
+Don't touch those lines if you don't know what they are.
+
+
+## Names of the class files
+
+TODO: Write out how to use the Thai / English titles and names of different elements of the page and the coverpages.

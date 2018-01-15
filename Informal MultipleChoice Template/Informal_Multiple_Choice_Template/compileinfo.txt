@@ -1,0 +1,1 @@
+{"Rseed":[1516016468],"file":["Informal_Multiple_Choice_Template.tex"],"homework":[false],"compile":[true],"xelatex":[true],"debug":[false],"help":[false],"noutput":[3],"randominfo":{"largeseed":[100000000]}}

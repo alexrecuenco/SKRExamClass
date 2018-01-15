@@ -1,0 +1,210 @@
+%!TEX encoding = UTF-8 Unicode
+% Created by Alejandro Gonzalez Recuenco, 2017
+% Do not share outside of BFITS
+% e-mail alejandrogonzalezrecuenco@gmail.com
+
+\documentclass[12pt, noquestionbreak, flushbottom, customfontpath=../Fonts/]{../skrexam}  %Draft option also removes the pictures
+
+\newtotcounter{totalpages}
+\newtotcounter{totalsections}
+\usepackage{tcolorbox}
+\tcbuselibrary{hooks}
+\usepackage{physics}
+
+\graphicspath{{../images/}{images/}}
+
+%  Showcasing commands for TexExamRandomizer
+%! TexExamRandomizer = {"noutput":3}
+%! TexExamRandomizer = {"randominfo": {"largeseed":100000000}}
+%! DISABLED TexExamRandomizer = {"table":"../Tables/TestClass.csv"}
+%! DISABLED TexExamRandomizer = {"randominfo": {"switchnumber":["even", "odd"]}}
+%! DISABLED TexExamRandomizer = {"extrainfo":{"class":"Class"}}
+%! DISABLED TexExamRandomizer =  {"extrainfo":{"rollnumber":"Roll Number","nickname":"Nickname"}, "seed":69504}
+
+
+
+\newcommand{\rseed}{1516016468} % number between 1 and 99999999
+\newcommand{\largeseed}{21357694}
+
+\pgfmathsetseed{\largeseed} % Setting the random number generation
+
+
+
+\newcommand{\myversion}{1} % this line is very (DO NOT DELETE)
+
+\newcommand{\studentclass}{M 6}
+
+
+
+\newcommand*\SchoolName{\textbf{\large Suankularb wittayalai Rangsit School}}
+\newcommand*\SchoolNameTH{\textbf{\small โรงเรียนสวนกุหลาบวิทยาลัย รังสิต}}
+
+
+%<Header & Footer>%
+\pagestyle{headandfoot}
+\firstpagefooter{Exam Version: \myversion}{\studentclass}{\thepage}
+\runningfooter{Exam Version: \myversion}{\studentclass}{\thepage}
+
+
+\runningfootrule
+\firstpagefootrule
+
+\begin{document}
+
+\global\edef\nmultiplechoice{\totalvalue{nummultiplechoice}}
+\global\edef\ntotalquestion{\totalvalue{questionnumber}}
+\global\edef\nshortanswer{\totalvalue{numshortanswer}}
+
+
+\begin{coverpages}
+
+
+\begin{center}
+\SchoolName~---~\SchoolNameTH
+
+\vspace{1cm}
+
+%%% TITLE OF EXAM %%%
+\textsc{\textbf{\Huge TITLE OF EXAM HERE}}
+
+\vspace{1cm}
+
+\begin{tcolorbox}[title ={\large Class~\studentclass\quad\quad Exam Version: \myversion}, center title, colback = white]
+
+Name: \hrulefill\ Nickname:\hrulefill
+
+\vspace{0.5cm}
+
+\raisebox{-0.5\height}{\includegraphics[height = 3cm]{SKR.jpg}}
+\hfill $\begin{aligned}\text{Roll Number: \rule{2cm}{0.5pt}}\\ \text{ID: \rule{2cm}{0.5pt}}\end{aligned}$ \hfill 
+\raisebox{-0.5\height}{\includegraphics[height = 3cm]{BFITS}}
+
+
+\tcblower
+
+\begin{itemize}
+	\item This quiz contains \total{totalpages} pages. 
+%	\item In those pages there are \total{totalsections} parts to the exam
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{1cm}
+
+
+\section*{Choose the correct answer} %Short Answer	
+
+\fullanswersheet[10]{\nmultiplechoice}
+
+
+\vspace{\stretch{1.5}}
+
+\end{center}
+
+\cleardoublepage
+
+\end{coverpages}
+
+
+
+
+%%% QUESTIONS GO HERE
+%% \begin{choices}(2) means ``two columns''
+%% \begin{choices}(1) means ``one column''
+
+
+\begin{questions}
+
+\question 
+	\pgfmathtruncatemacro{\coeficient}{random(2,10)} 
+	\pgfmathtruncatemacro{\exponent}{random(3, 10)} % MUST BE BIGEERN THAN 2 TO WORK
+	\pgfmathtruncatemacro{\resultexponent}{\exponent-1}
+	\pgfmathtruncatemacro{\resultcoeficient}{\coeficient*\exponent}
+	What is the value of $\dv{\qty(\coeficient x^{\exponent})}{x}$
+	\begin{choices}
+		\choice $\dv{\qty(\coeficient x^{\exponent})}{x} = \resultcoeficient x$
+%		\choice $\dv{\qty(\coeficient x^{\exponent})}{x} = \resultcoeficient x^{\exponent}$
+		\choice\CorrectChoice $\dv{\qty(\coeficient x^{\exponent})}{x} = \resultcoeficient x^{\resultexponent}$
+		\choice $\dv{\qty(\coeficient x^{\exponent})}{x} = \coeficient x^{\resultexponent}$
+		\choice $\dv{\qty(\coeficient x^{\exponent})}{x} = \coeficient x^{\exponent}$
+	\end{choices}
+
+	\question According to the product rule, when I have two functions, $f(x)$ and $g(x)$, what is the derivative of $h(x) = f(x) g(x)$?
+	\begin{choices}
+		\choice\CorrectChoice $h'(x) = f'(x) g(x)+ f(x) g '(x)$.
+		\choice $h'(x) = f'(x) g(x)$.
+		\choice $h'(x) = f'(x) g '(x)$.
+		\choice $h'(x) = f(x) g '(x)$.
+	\end{choices}
+
+
+	\question What does the second derivative being 0 tells us?
+	\begin{choices}(1)
+		\choice When the first derivative is $0$ at one point, $f^{\prime \prime}(a) = 0$, that means that the graph of the function crosses the $x$ axes on that point.
+		\choice When the first derivative is $0$ at one point, $f^{\prime \prime}(a) = 0$, that means that the point is always a local maximum or a local minimum of the graph.
+		\choice\CorrectChoice When the first derivative is $0$ at one point, $f^{\prime \prime}(a) = 0$, that means that the point is always an inflection of the graph.
+		\choice When the first derivative is $0$ at one point, $f^{\prime \prime}(a) = 0$, that means that the slope of the graph is $0$ at that point.
+	\end{choices}
+
+	\question Given a continuous function at every point in the real line, $f(x)$. Which of these statements is true. 
+	\begin{choices}(1)
+		\choice The function $f(x)$ must cross the $x$ axis at least once.
+		\choice The function $f(x)$ never crosses the $x$ axis.
+		\choice\CorrectChoice For all values $a$ on the real line, $ \lim_{x \to a}f(x)  = 0$
+		\choice The function $f(x)$ jumps the $y$ axis.
+	\end{choices}
+	
+
+	
+	\question According to the product rule, when I have two functions, $f(x)$ and $g(x)$, what is the derivative of $h(x) = f(x) g(x)$:
+	\begin{choices}
+		\choice $h'(x) = f'(x) g '(x)$
+		\choice\CorrectChoice $h'(x) = f'(x) g(x)+ f(x) g '(x)$
+		\choice $h'(x) = f'(x) g(x)$
+		\choice $h'(x) = f(x) g '(x)$
+	\end{choices}
+
+	\question What is the derivative of  $f(x) = (x + 2)(2x- 1)$,
+	\begin{choices}
+		\choice $f'(x) = 2x - 1$
+		\choice $f'(x) = 2x + 4$
+		\choice\CorrectChoice $f'(x) = 4 x + 3$
+		\choice $f'(x) = 2$
+	\end{choices}
+
+
+
+
+	\question What does the first derivative being 0 tells us?
+	\begin{choices}(1)
+		\choice When the first derivative is $0$ at one point, $f'(a) = 0$, that means that the point is always a local maximum or a local minimum of the graph.
+		\choice When the first derivative is $0$ at one point, $f'(a) = 0$, that means that the graph of the function crosses the $x$ axes on that point
+		\choice\CorrectChoice When the first derivative is $0$ at one point, $f'(a) = 0$, that means that the slope of the graph is $0$ at that point
+		\choice When the first derivative is $0$ at one point, $f'(a) = 0$, that means that the point is always an inflection of the graph.
+	\end{choices}
+
+\question What is the definition of the derivative of $f(x)$
+ 	\begin{choices}(2)
+	\choice $\displaystyle f^\prime(x) = \lim_{h \to 0} \frac{f(x)}{x}$
+	\choice $\displaystyle f^\prime(x) = \lim_{h \to 0} \frac{f(x) - f(h)}{h}$
+	\choice $\displaystyle f^\prime(x) = \lim_{h \to 0} \frac{f(x+h)-f(x)}{x}$	
+ 	\choice\CorrectChoice $\displaystyle f^\prime(x) = \lim_{h \to 0} \frac{f(x+h)-f(x)}{h}$
+ 	\end{choices}
+
+\end{questions}
+
+
+
+
+
+
+\[
+\underset{% 
+%	\text{End of \thesection}%
+	}{%
+	\text{\underline{\hspace{\textwidth}}}%
+}
+\]
+\setcounter{totalpages}{\value{page}}
+\setcounter{totalsections}{\value{section}}
+
+\end{document}

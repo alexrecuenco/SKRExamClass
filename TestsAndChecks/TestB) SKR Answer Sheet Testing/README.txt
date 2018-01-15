@@ -1,6 +1,9 @@
 README:
 
-Template that can be used to generate the answer sheets.
+THis test keeps the fonts and images in the same folder, to make sure this always works.
+
+
+Template that can be used to generate the answer sheets, is written in easysetup.tex:
 
 
 Modify only the commands:
